@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Cliente;
 import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import enums.Estado;
 import exceptions.BusinessException;
 
 public class ClienteDaoImpl implements ClienteDao{
@@ -26,7 +29,7 @@ public class ClienteDaoImpl implements ClienteDao{
 		
 		if(!isNovoCliente(e))
 			throw new BusinessException("O cliente " + e + "já está cadastrado!");
-		String sql = sqlInsertBuilder(e);
+		String sql = sqlInsertBuilder();
 		try{		
 			stmt = con.prepareStatement(sql);
 			stmt.setObject(1,e.getNome());
@@ -77,7 +80,7 @@ public class ClienteDaoImpl implements ClienteDao{
 	 * 
 	 * @author bruno
 	 */
-	private String sqlInsertBuilder(Cliente e) {
+	private String sqlInsertBuilder() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into cliente");
 		sql.append("(");
@@ -201,6 +204,38 @@ public class ClienteDaoImpl implements ClienteDao{
 		sql.append("email_cliente = ? ");
 		sql.append("where cod_cliente = ?");
 		return sql.toString().toUpperCase();
+	}
+
+	/**
+	 * Lista todos os clientes cadastrados na base de dados
+	 */
+	@Override
+	public List<Cliente> listAll() throws Exception {
+		List<Cliente> lista = new ArrayList<Cliente>();
+		Cliente c  = null;
+		String sql = "select * from cliente".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet    result = null;		
+		stmt.execute();	
+		result = stmt.getResultSet();
+		
+		while(result.next()){
+			c = new Cliente();
+			c.setNome(result.getString(1));
+		    c.setRg(result.getString(2));
+		    c.setEndereco(result.getString(3));
+		    c.setBairro(result.getString(4));
+		    c.setCidade(result.getString(5));
+		    c.setUf(Estado.valueOf(result.getString(6)));
+		    c.setTelefone(result.getString(7));
+		    c.setEmail(result.getString(8));
+		    c.setCod(result.getInt(9));
+		    
+		    lista.add(c);			                           
+		}
+		return lista;
 	}
 	
 }

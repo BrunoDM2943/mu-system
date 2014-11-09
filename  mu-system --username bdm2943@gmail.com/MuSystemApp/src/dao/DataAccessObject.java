@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import dao.excepetions.DataAccessException;
 
 public interface DataAccessObject<T>{
@@ -36,6 +38,16 @@ public interface DataAccessObject<T>{
 	 * @throws Exception 
 	 * @since 1.0
 	 */
-	void update(T e) throws Exception;			
+	void update(T e) throws Exception;
+	
+	
+	/**
+	 * List all registers from the database for
+	 * a given class
+	 * 
+	 * @return A list containing all registers
+	 * @throws Exception
+	 */
+	List<T> listAll() throws Exception;
 
 }

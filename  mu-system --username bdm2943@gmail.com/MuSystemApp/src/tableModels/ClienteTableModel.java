@@ -25,7 +25,7 @@ public class ClienteTableModel extends DefaultTableModel{
 	}
 	
 	public ClienteTableModel() {
-		// TODO Auto-generated constructor stub
+		this.listaClientes = new ArrayList<Cliente>();
 	}
 
 	@Override

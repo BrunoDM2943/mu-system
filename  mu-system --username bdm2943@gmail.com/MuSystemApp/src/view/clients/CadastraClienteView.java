@@ -19,7 +19,7 @@ import model.Cliente;
 import controller.ClienteController;
 import enums.Estado;
 
-public class RegisterClientView extends JInternalFrame implements ActionListener{
+public class CadastraClienteView extends JInternalFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -53,7 +53,7 @@ public class RegisterClientView extends JInternalFrame implements ActionListener
 	private MaskFormatter maskTelefone;
 	
 	
-	public RegisterClientView() {		
+	public CadastraClienteView() {		
 		 inicializar();
 		 setActions();
 		 setLayout();
