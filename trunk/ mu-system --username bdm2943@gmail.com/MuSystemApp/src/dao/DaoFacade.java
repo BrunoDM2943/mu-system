@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import dao.annotations.DataAccessClass;
 import dao.excepetions.DataAccessClassException;
 import dao.excepetions.DataAccessException;
@@ -14,13 +16,43 @@ public class DaoFacade{
 	 * @param e
 	 * @throws Exception 
 	 */
-	public static <T> void gravar(Object e) throws Exception{
+	public static <T> void save(Object e) throws Exception{
 		DataAccessClass daoClass = getAccessClass(e);
 		Class<?> clazzImpl = getClass(daoClass.daoImpl());
 		DataAccessObject<Object> dao = getImplementation(clazzImpl);		
 		dao.save(e);			
 	}
 	
+	/**
+	 * Delete one entity
+	 * @param <T>
+	 * 
+	 * @param e
+	 * @throws Exception 
+	 */
+	public static <T> void delete(Object e) throws Exception{
+		DataAccessClass daoClass = getAccessClass(e);
+		Class<?> clazzImpl = getClass(daoClass.daoImpl());
+		DataAccessObject<Object> dao = getImplementation(clazzImpl);		
+		dao.delete(e);			
+	}
+	
+	/**
+	 * Recebe uma classe como parâmetros e
+	 * retorna uma lista do banco com todos os registros
+	 * da classe desejada
+	 * 
+	 * @throws Exception se a classe não tiver uma DAO relacionada
+	 */
+	@SuppressWarnings("rawtypes")
+	public static List<?> lerTodos(Class clazz) throws Exception {
+		DataAccessClass daoClass = getAccessClas(clazz);
+		Class<?> clazzImpl = getClass(daoClass.daoImpl());
+		DataAccessObject<Object> dao = getImplementation(clazzImpl);				
+		return dao.listAll();		
+	}
+	
+
 	/**
 	 * Return a class for a given name
 	 * @param clazz The class name
@@ -78,5 +110,32 @@ public class DaoFacade{
 			return daoClass;
 		}
 	}
+	
+	/**
+	 * Get the DataAccessClass for a given
+	 * class
+	 * 
+	 * @param e The class
+	 * @return The DaoClass for the object
+	 * @throws DataAccessClassException
+	 * 
+	 * @author bruno
+	 */
+	@SuppressWarnings("rawtypes")
+	private static DataAccessClass getAccessClas(Class clazz) throws DataAccessClassException {
+		@SuppressWarnings("unchecked")
+		DataAccessClass daoClass = (DataAccessClass) clazz.getAnnotation(DataAccessClass.class);
+		if(daoClass == null){
+			throw new DataAccessClassException("No DataAccessClass found for " +  clazz.toString());
+		}else if("".equals(daoClass.daoImpl())){
+			throw new DataAccessClassException("The DataAccessClass is empty");
+		}else{
+			return daoClass;
+		}
+	}
+
+	
+	
+	
 	
 }

@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ public class GerenciaClienteView extends JInternalFrame implements ActionListene
 	
 	private JPanel painel;
 	private JPanel painelBotoes;
+	private JScrollPane painelScroll;
 	
 	private JTable tblClietes;	
 	private DefaultTableModel tblModel;
@@ -71,6 +73,7 @@ public class GerenciaClienteView extends JInternalFrame implements ActionListene
 		btnCancelar = new JButton("Cancelar");		
 		
 		painel = new JPanel(new GridLayout(2, 1, 10, 10));
+		painelScroll = new JScrollPane(painel);
 		painelBotoes = new JPanel(new GridLayout(1, 3, 5, 5));
 	}
 	
@@ -88,7 +91,7 @@ public class GerenciaClienteView extends JInternalFrame implements ActionListene
 		painel.add(tblClietes);
 		painel.add(painelBotoes);
 		
-		this.add(painel);
+		this.add(painelScroll);
 	}
 	
 	/**
