@@ -84,7 +84,9 @@ public class DaoFacade{
 	
 		try{
 			newInstance = ((DataAccessObject<Object>) clazzImpl.newInstance());
-		}catch(InstantiationException | IllegalAccessException e){
+		}catch(InstantiationException e){
+			throw new DataAccessException(e.getMessage());
+		}catch(IllegalAccessException e){
 			throw new DataAccessException(e.getMessage());
 		}
 		return newInstance;

@@ -21,10 +21,9 @@ public class ClienteController {
 
 	//FIXME Melhorar!
 	@SuppressWarnings("unchecked")
-	public DefaultTableModel carregarTabela(DefaultTableModel tblModel) throws Exception {
-		List<Cliente> listaClientes = (List<Cliente>) DaoFacade.lerTodos(Cliente.class);		
-		tblModel = new ClienteTableModel(listaClientes);					
-		return tblModel;
+	public List<Cliente> carregarTabela() throws Exception {
+		List<Cliente> listaClientes = (List<Cliente>) DaoFacade.lerTodos(Cliente.class);								
+		return listaClientes;
 	}
 
 }

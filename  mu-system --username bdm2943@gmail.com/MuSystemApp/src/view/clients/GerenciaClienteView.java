@@ -12,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import tableModels.ClienteTableModel;
+
 import controller.ClienteController;
 
 public class GerenciaClienteView extends JInternalFrame implements ActionListener{
@@ -23,7 +25,7 @@ public class GerenciaClienteView extends JInternalFrame implements ActionListene
 	private JScrollPane painelScroll;
 	
 	private JTable tblClietes;	
-	private DefaultTableModel tblModel;
+	private ClienteTableModel tblModel;
 	
 	private JButton btnAlterar;
 	private JButton btnDeletar;
@@ -60,9 +62,8 @@ public class GerenciaClienteView extends JInternalFrame implements ActionListene
 	 */
 	private void inicializar(){
 		tblClietes = new JTable();
-		tblModel = crtl.getTableModel();
 		try {
-			tblModel = crtl.carregarTabela(tblModel);
+			tblModel = new ClienteTableModel(crtl.carregarTabela());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
