@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import model.Cliente;
-import tableModels.ClienteTableModel;
 import tableModels.TableModelFactory;
 import dao.DaoFacade;
 

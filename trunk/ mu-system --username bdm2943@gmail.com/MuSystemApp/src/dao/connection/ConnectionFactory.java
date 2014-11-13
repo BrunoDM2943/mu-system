@@ -12,24 +12,18 @@ public class ConnectionFactory{
 	
 	private static Connection con;
 	private static final String driver = "com.mysql.jdbc.Driver";
-	private static final String url = "jdbc:mysql://localhost/mu_system";
+	private static final String url = "jdbc:mysql://localhost3306/test";
 	private static final String usuario = "root";
-	private static final String senha = "61417181@ab";
+	private static final String senha = "";
 	
-	private static Logger log = Logger.getGlobal();
-
 	public static Connection getConnection() throws DataAccessException {
 	        try{
 	            Class.forName(driver);	            
-	            log.log(Level.INFO, "Connecting to database");
 	            con = DriverManager.getConnection(url, usuario, senha);
-	            log.log(Level.INFO, "Connected");
 	            return con;
-	        }catch(ClassNotFoundException Driver){
-	        	log.log(Level.INFO, "Driver not found");
+	        }catch(ClassNotFoundException Driver){	        	
 	            throw new DataAccessException("Driver not found!");
 	        }catch(SQLException Fonte){
-	        	log.log(Level.INFO, "Error on connection");
 	        	throw new DataAccessException("Error on connection");
 	        }
 	}
