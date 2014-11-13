@@ -5,6 +5,7 @@ import java.util.List;
 import dao.annotations.DataAccessClass;
 import dao.excepetions.DataAccessClassException;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.DataAccessObject;
 
 public class DaoFacade{
 	

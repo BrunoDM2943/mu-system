@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Cliente;
 import services.login.LoginException;
 import services.login.User;
 import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.SqlBuilder;
 import exceptions.BusinessException;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao, SqlBuilder{
 
 	private Connection con;
 	
@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao{
 		
 		if(!isNovoUsuario(e))
 			throw new BusinessException("O usuario " + e + "já está cadastrado!");
-		String sql = sqlInsertBuilder();
+		String sql = insertBuilder();
 		try{		
 			stmt = con.prepareStatement(sql);
 			stmt.setObject(1,e.getLogin());
@@ -137,31 +137,9 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	
-	/**
-	 * Constroi o sql para atualizar o
-	 * usuario na base de dados
-	 * @param e cliente
-	 * @return sql construido
-	 * 
-	 * @author bruno
-	 */
-	private String sqlUpdateBuilder(Cliente e) {
-		StringBuilder sql = new StringBuilder();
-		sql.append("update sis_user ");
-		sql.append("set nome = ?, ");
-		sql.append("senha = ?");		
-		sql.append("where id_user = ?");
-		return sql.toString().toUpperCase();
-	}
-	
-	/**
-	 * Constroi o sql para inserir o
-	 * cliente
-	 * @return sql construido
-	 * 
-	 * @author bruno
-	 */
-	private String sqlInsertBuilder() {
+
+	@Override
+	public String insertBuilder() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into sis_user");
 		sql.append("(");
@@ -170,6 +148,16 @@ public class UserDaoImpl implements UserDao{
 		sql.append(")");
 		sql.append(" values ");
 		sql.append("(?, ?)");
+		return sql.toString().toUpperCase();
+	}
+
+	@Override
+	public String updateBuilder() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("update sis_user ");
+		sql.append("set nome = ?, ");
+		sql.append("senha = ?");		
+		sql.append("where id_user = ?");
 		return sql.toString().toUpperCase();
 	}
 

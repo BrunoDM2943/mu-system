@@ -11,10 +11,11 @@ import model.Cliente;
 import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.SqlBuilder;
 import enums.Estado;
 import exceptions.BusinessException;
 
-public class ClienteDaoImpl implements ClienteDao{
+public class ClienteDaoImpl implements ClienteDao, SqlBuilder{
 
 	private Connection con;
 	
@@ -29,7 +30,7 @@ public class ClienteDaoImpl implements ClienteDao{
 		
 		if(!isNovoCliente(e))
 			throw new BusinessException("O cliente " + e + "já está cadastrado!");
-		String sql = sqlInsertBuilder();
+		String sql = insertBuilder();
 		try{		
 			stmt = con.prepareStatement(sql);
 			stmt.setObject(1,e.getNome());
@@ -72,31 +73,6 @@ public class ClienteDaoImpl implements ClienteDao{
 		
 	}
 
-	/**
-	 * Constroi o sql para inserir o
-	 * cliente
-	 * @param e cliente
-	 * @return sql construido
-	 * 
-	 * @author bruno
-	 */
-	private String sqlInsertBuilder() {
-		StringBuilder sql = new StringBuilder();
-		sql.append("insert into cliente");
-		sql.append("(");
-		sql.append("nome_cliente,");
-		sql.append("rg_cliente,");
-		sql.append("endereco_cliente,");
-		sql.append("bairro_cliente,");
-		sql.append("cidade_cliente,");
-		sql.append("uf_cliente,");
-		sql.append("telefone_cliente,");
-		sql.append("email_cliente");
-		sql.append(")");
-		sql.append(" values ");
-		sql.append("(?, ?, ?, ?, ?, ?, ?, ?)");
-		return sql.toString().toUpperCase();
-	}
 
 	/**
 	 * Valida se um cliente já existe no banco
@@ -159,7 +135,7 @@ public class ClienteDaoImpl implements ClienteDao{
 		con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;		
 		
-		String sql = sqlUpdateBuilder(e);
+		String sql = updateBuilder();
 
 		try{
 			stmt = con.prepareStatement(sql);
@@ -183,28 +159,7 @@ public class ClienteDaoImpl implements ClienteDao{
 		
 	}
 
-	/**
-	 * Constroi o sql para atualizar o
-	 * cliente na base de dados
-	 * @param e cliente
-	 * @return sql construido
-	 * 
-	 * @author bruno
-	 */
-	private String sqlUpdateBuilder(Cliente e) {
-		StringBuilder sql = new StringBuilder();
-		sql.append("update cliente ");
-		sql.append("set nome_cliente = ?, ");
-		sql.append("rg_cliente = ?, ");
-		sql.append("endereco_cliente = ?, ");
-		sql.append("bairro_cliente = ? ,");
-		sql.append("cidade_cliente = ? ,");
-		sql.append("uf_cliente = ? ,");
-		sql.append("telefone_cliente = ? ,");
-		sql.append("email_cliente = ? ");
-		sql.append("where cod_cliente = ?");
-		return sql.toString().toUpperCase();
-	}
+
 
 	/**
 	 * Lista todos os clientes cadastrados na base de dados
@@ -236,6 +191,41 @@ public class ClienteDaoImpl implements ClienteDao{
 		    lista.add(c);			                           
 		}
 		return lista;
+	}
+
+	@Override
+	public String insertBuilder() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into cliente");
+		sql.append("(");
+		sql.append("nome_cliente,");
+		sql.append("rg_cliente,");
+		sql.append("endereco_cliente,");
+		sql.append("bairro_cliente,");
+		sql.append("cidade_cliente,");
+		sql.append("uf_cliente,");
+		sql.append("telefone_cliente,");
+		sql.append("email_cliente");
+		sql.append(")");
+		sql.append(" values ");
+		sql.append("(?, ?, ?, ?, ?, ?, ?, ?)");
+		return sql.toString().toUpperCase();
+	}
+
+	@Override
+	public String updateBuilder() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("update cliente ");
+		sql.append("set nome_cliente = ?, ");
+		sql.append("rg_cliente = ?, ");
+		sql.append("endereco_cliente = ?, ");
+		sql.append("bairro_cliente = ? ,");
+		sql.append("cidade_cliente = ? ,");
+		sql.append("uf_cliente = ? ,");
+		sql.append("telefone_cliente = ? ,");
+		sql.append("email_cliente = ? ");
+		sql.append("where cod_cliente = ?");
+		return sql.toString().toUpperCase();
 	}
 	
 }
