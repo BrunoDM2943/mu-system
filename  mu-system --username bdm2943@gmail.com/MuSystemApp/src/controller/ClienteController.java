@@ -21,7 +21,6 @@ public class ClienteController {
 	//FIXME Melhorar!
 	@SuppressWarnings("unchecked")
 	public List<Cliente> carregarTabela() throws Exception {
-		String hue = "huehue";
 		List<Cliente> listaClientes = (List<Cliente>) DaoFacade.lerTodos(Cliente.class);
 		for(int i = 0; i< 5;i++)
 			System.out.println(i);
