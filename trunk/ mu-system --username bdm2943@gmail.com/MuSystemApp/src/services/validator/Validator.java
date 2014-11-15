@@ -1,6 +1,6 @@
 package services.validator;
 
-public class Validator {
+public abstract class Validator {
 	
 	public static boolean isEmpty(String e){
 		return "".equalsIgnoreCase(e) || e == null || "null".equals(e);

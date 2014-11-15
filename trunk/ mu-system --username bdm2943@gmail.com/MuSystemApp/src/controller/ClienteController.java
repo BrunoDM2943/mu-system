@@ -13,7 +13,6 @@ public class ClienteController {
 		DaoFacade.save(cliente);
 	}
 
-	//FIXME Melhorar!
 	@SuppressWarnings("unchecked")
 	public List<Cliente> listarTodos() throws Exception {
 		if(listaClientes != null)
@@ -28,6 +27,10 @@ public class ClienteController {
 	public void deletarCliente(Cliente cli) throws Exception {		
 		DaoFacade.delete(cli);
 		listaClientes.remove(cli);
+	}
+
+	public void atualizarCliente(Cliente cli) throws Exception {
+		DaoFacade.update(cli);		
 	}
 
 }

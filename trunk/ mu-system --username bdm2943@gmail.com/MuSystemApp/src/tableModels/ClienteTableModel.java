@@ -130,7 +130,7 @@ public class ClienteTableModel extends AbstractTableModel{
 				break;
 			}		
 		}catch (BusinessException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());			
 		}
 	}
 	

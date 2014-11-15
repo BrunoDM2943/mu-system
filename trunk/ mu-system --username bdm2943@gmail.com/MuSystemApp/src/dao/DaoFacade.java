@@ -136,6 +136,20 @@ public class DaoFacade{
 			return daoClass;
 		}
 	}
+	
+	/**
+	 * Save one entity
+	 * @param <T>
+	 * 
+	 * @param e
+	 * @throws Exception 
+	 */
+	public static <T> void update(Object e) throws Exception{
+		DataAccessClass daoClass = getAccessClass(e);
+		Class<?> clazzImpl = getClass(daoClass.daoImpl());
+		DataAccessObject<Object> dao = getImplementation(clazzImpl);		
+		dao.update(e);			
+	}
 
 	
 	
