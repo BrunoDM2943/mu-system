@@ -1,4 +1,4 @@
-package testCases.UC01;
+package testCases.frameWork;
 import model.Cliente;
 
 import org.junit.Test;

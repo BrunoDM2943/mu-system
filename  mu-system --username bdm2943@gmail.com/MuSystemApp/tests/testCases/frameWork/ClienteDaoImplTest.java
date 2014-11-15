@@ -1,4 +1,8 @@
-package testCases.UC01;
+package testCases.frameWork;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import model.Cliente;
 
@@ -32,6 +36,7 @@ public class ClienteDaoImplTest{
 		cliVazio.setNome("Nome Vazio");
 		cliVazio.setRg("19");
 		cliVazio.setEndereco("endereco vazio");
+		cliVazio.setUf(Estado.SP);
 	}
 	
 	@Test
@@ -73,6 +78,21 @@ public class ClienteDaoImplTest{
 		cliCarregado.setNome("Novo nome");			
 		dao.update(cliCarregado);
 		
+	}
+	
+	@Test
+	public void TC06LerTodos() throws Exception {
+		dao.save(cliCarregado);
+		List<Cliente> lista = dao.listAll();
+		assertTrue(lista.contains(cliCarregado));
+		dao.delete(cliCarregado);
+	}
+	
+	@Test
+	public void TC07LerTodosVazio() throws Exception {
+		dao.delete(cliCarregado);
+		List<Cliente> lista = dao.listAll();
+		assertTrue(lista.isEmpty());
 	}
 	
 

@@ -80,7 +80,9 @@ public class Cliente {
 	}
 	
 
-	public void setUf(Estado uf) {
+	public void setUf(Estado uf) throws BusinessException {
+		if(uf == null)
+			throw new BusinessException("O Estado de um cliente não pode ser vazio!");
 		this.uf = uf;
 	}
 
@@ -99,8 +101,9 @@ public class Cliente {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {		
-		this.telefone = telefone.replaceAll(".","").replace("-", "");
+	public void setTelefone(String telefone) {
+		if(!Validator.isEmpty(telefone))
+			this.telefone = telefone.replaceAll(".","").replace("-", "");
 	}
 
 	public String getEmail() {
@@ -119,12 +122,7 @@ public class Cliente {
 	@Override
 	public boolean equals(Object obj) {		
 		Cliente c = (Cliente) obj;		
-		return c.hashCode() == this.hashCode();	
-	}
-	
-	@Override
-	public int hashCode() {	
-		return Integer.valueOf(rg);
+		return c.getRg().equals(this.rg);	
 	}
 
 }

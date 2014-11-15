@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import view.clients.CadastraClienteView;
@@ -61,7 +62,7 @@ public class Menu extends JFrame implements ActionListener{
 	private void setFrame() {
 		this.setTitle("Menu");
 		try {
-			UIManager.setLookAndFeel(new NimbusLookAndFeel());
+			UIManager.setLookAndFeel(new MetalLookAndFeel());
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
@@ -126,22 +127,14 @@ public class Menu extends JFrame implements ActionListener{
 	 * @throws PropertyVetoException 
 	 */
 	private void makesInternalFrame(Object src) throws PropertyVetoException {
-		if(src.equals(cadastraCliente)){			
-			if(cadastraClienteView == null){			
+		if(src.equals(cadastraCliente)){				
 				cadastraClienteView = new CadastraClienteView();
 				desktop.add(cadastraClienteView);
 				cadastraClienteView.setVisible(true);
-			}else{				
-					cadastraClienteView.setSelected(true);				
-			}
-		}else if(src.equals(gerenciaClientes)){
-			if(gerenciaClienteView == null){			
+		}else if(src.equals(gerenciaClientes)){				
 				gerenciaClienteView = new GerenciaClienteView();
 				desktop.add(gerenciaClienteView);
 				gerenciaClienteView.setVisible(true);
-			}else{				
-				gerenciaClienteView.setSelected(true);				
-			}
 		}
 		
 	}
