@@ -2,29 +2,32 @@ package controller;
 
 import java.util.List;
 
-import javax.swing.table.DefaultTableModel;
-
 import model.Cliente;
-import tableModels.TableModelFactory;
 import dao.DaoFacade;
 
 public class ClienteController {
+	
+	private List<Cliente> listaClientes;
 	
 	public void gravarCliente(Cliente cliente) throws Exception{
 		DaoFacade.save(cliente);
 	}
 
-	public DefaultTableModel getTableModel() {
-		return TableModelFactory.getTableModel(Cliente.class);
-	}
-
 	//FIXME Melhorar!
 	@SuppressWarnings("unchecked")
-	public List<Cliente> carregarTabela() throws Exception {
-		List<Cliente> listaClientes = (List<Cliente>) DaoFacade.lerTodos(Cliente.class);
-		for(int i = 0; i< 5;i++)
-			System.out.println(i);
+	public List<Cliente> listarTodos() throws Exception {
+		if(listaClientes != null)
+			return listaClientes;
+		listaClientes = (List<Cliente>) DaoFacade.lerTodos(Cliente.class);
+		if(listaClientes.isEmpty())
+			throw new Exception("Não há clientes cadastrados na base!");
+		
 		return listaClientes;
+	}
+
+	public void deletarCliente(Cliente cli) throws Exception {		
+		DaoFacade.delete(cli);
+		listaClientes.remove(cli);
 	}
 
 }

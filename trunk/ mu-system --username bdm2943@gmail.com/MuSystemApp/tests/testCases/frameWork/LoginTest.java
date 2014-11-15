@@ -1,4 +1,4 @@
-package testCases.UC01;
+package testCases.frameWork;
 
 import org.junit.Test;
 

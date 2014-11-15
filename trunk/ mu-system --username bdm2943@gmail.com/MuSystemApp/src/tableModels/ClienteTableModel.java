@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 
 import model.Cliente;
 import enums.Estado;
 import exceptions.BusinessException;
 
-public class ClienteTableModel extends DefaultTableModel{
+public class ClienteTableModel extends AbstractTableModel{
 
 	private static final long serialVersionUID = -5460736422410533100L;
 
-	private ArrayList<Cliente> listaClientes;
+	private List<Cliente> listaClientes;
 	
 	String[] colunas = {"Nome","Rg","Endereco",
 						"Bairro","cidade","Uf",     
@@ -25,7 +25,7 @@ public class ClienteTableModel extends DefaultTableModel{
 	}
 	
 	public ClienteTableModel() {
-		this.listaClientes = new ArrayList<Cliente>();
+		listaClientes = new ArrayList<Cliente>();
 	}
 
 	@Override
@@ -132,6 +132,17 @@ public class ClienteTableModel extends DefaultTableModel{
 		}catch (BusinessException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
+	}
+	
+	public Cliente get(String rg) throws Exception{	
+		Cliente cli = new Cliente();
+		try {
+			cli.setRg(rg);
+		} catch (BusinessException e) {
+			throw new Exception("Nenhum cliente foi selecionado");
+		}
+		int idx = listaClientes.indexOf(cli);
+		return listaClientes.get(idx);
 	}
 
 }
