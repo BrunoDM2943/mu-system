@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import services.validator.Validator;
 import model.Fabricante;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
@@ -32,7 +33,7 @@ private Connection con;
 		try{		
 			stmt = con.prepareStatement(sql);
 			stmt.setObject(1,e.getNome());
-			stmt.setObject(2,e.getTelefone());
+			stmt.setObject(2,Validator.nlv(e.getTelefone()));
 			stmt.setObject(3,e.getContato());
 			System.out.println(stmt.toString());			
 			stmt.execute();
@@ -182,7 +183,7 @@ private Connection con;
 		sql.append("(");
 		sql.append("nome_fabricante,");
 		sql.append("telefone_fabricante,");
-		sql.append("nome_contato,");
+		sql.append("nome_contato");
 		sql.append(")");
 		sql.append(" values ");
 		sql.append("(?, ?, ?)");
@@ -195,7 +196,7 @@ private Connection con;
 		sql.append("update fabricante ");
 		sql.append("set nome_fabricante = ?, ");
 		sql.append("telefone_fabricante = ?, ");
-		sql.append("nome_contato = ?, ");
+		sql.append("nome_contato = ? ");
 		sql.append("where cod_fabricante = ?");
 		return sql.toString().toUpperCase();
 	}
