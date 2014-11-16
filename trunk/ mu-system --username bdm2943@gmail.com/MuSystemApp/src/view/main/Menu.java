@@ -21,20 +21,20 @@ public class Menu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	
-	private JDesktopPane desktop    	 = new JDesktopPane();
+	private JDesktopPane desktop    	  = new JDesktopPane();
 	
-	private JMenuBar  menuBar       	 = new JMenuBar();
+	private JMenuBar  menuBar       	  = new JMenuBar();
 	
-	private JMenu     menuRegistros 	 = new JMenu("Cadastros");
-	private JMenuItem cadastraCliente    = new JMenuItem("Clientes");
+	private JMenu     menuRegistros 	  = new JMenu("Cadastros");
+	private JMenuItem cadastraCliente     = new JMenuItem("Clientes");
+	private JMenuItem cadastraFabricante  = new JMenuItem("Fabricantes");
 	
-	private JMenu     menuGerenciamento  = new JMenu("Gerenciamento");
-	private JMenuItem gerenciaClientes   = new JMenuItem("Clientes");
+	private JMenu     menuGerenciamento   = new JMenu("Gerenciamento");
+	private JMenuItem gerenciaClientes    = new JMenuItem("Clientes");
+	private JMenuItem gerenciaFabricantes = new JMenuItem("Fabricantes");
 	
 	private CadastraClienteView cadastraClienteView;
 	private GerenciaClienteView gerenciaClienteView;
-	
-
 	
 	public Menu() {
 		inicializar();
@@ -45,7 +45,9 @@ public class Menu extends JFrame implements ActionListener{
 	
 	private void setActions() {
 		cadastraCliente.addActionListener(this);
+		cadastraFabricante.addActionListener(this);
 		gerenciaClientes.addActionListener(this);
+		gerenciaFabricantes.addActionListener(this);
 	}
 
 
@@ -81,9 +83,11 @@ public class Menu extends JFrame implements ActionListener{
 		                                                
 		menuRegistros 	= new JMenu("Cadastros");    
 		cadastraCliente = new JMenuItem("Clientes"); 
+		cadastraFabricante = new JMenuItem("Fabricantes");
 		                                                
 		menuGerenciamento  = new JMenu("Gerenciamento");
-		gerenciaClientes   = new JMenuItem("Clientes"); 					
+		gerenciaClientes   = new JMenuItem("Clientes"); 	
+		gerenciaFabricantes = new JMenuItem("Fabricantes");
 	}
 	
 	/**
@@ -99,7 +103,10 @@ public class Menu extends JFrame implements ActionListener{
 		menuBar.add(menuGerenciamento);
 		
 		menuRegistros.add(cadastraCliente);
+		menuRegistros.add(cadastraFabricante);
+		
 		menuGerenciamento.add(gerenciaClientes);
+		menuGerenciamento.add(gerenciaFabricantes);
 	}
 
 	@Override
