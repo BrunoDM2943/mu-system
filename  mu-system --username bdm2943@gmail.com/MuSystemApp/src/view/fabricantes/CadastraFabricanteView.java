@@ -86,8 +86,8 @@ public class CadastraFabricanteView extends JInternalFrame implements ActionList
 		
 		btnGravar   = new JButton("Gravar");
 		btnCancelar = new JButton("Cancelar");
-	
-		grade = new GridLayout(9, 2, 5, 5);
+		
+		grade = new GridLayout(4, 2, 5, 5);
 		
 		painel = new JPanel(grade);
 	}

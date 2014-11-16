@@ -15,6 +15,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import view.clientes.CadastraClienteView;
 import view.clientes.GerenciaClienteView;
+import view.fabricantes.CadastraFabricanteView;
 
 public class Menu extends JFrame implements ActionListener{
 
@@ -33,8 +34,9 @@ public class Menu extends JFrame implements ActionListener{
 	private JMenuItem gerenciaClientes    = new JMenuItem("Clientes");
 	private JMenuItem gerenciaFabricantes = new JMenuItem("Fabricantes");
 	
-	private CadastraClienteView cadastraClienteView;
-	private GerenciaClienteView gerenciaClienteView;
+	private CadastraClienteView    cadastraClienteView;
+	private CadastraFabricanteView cadastraFabricanteView;
+	private GerenciaClienteView    gerenciaClienteView;
 	
 	public Menu() {
 		inicializar();
@@ -54,6 +56,7 @@ public class Menu extends JFrame implements ActionListener{
 	/**
 	 * Configuar o frame da janela
 	 * @author bruno
+	 * @author joão
 	 */
 	private void setFrame() {
 		this.setTitle("Menu");
@@ -132,6 +135,10 @@ public class Menu extends JFrame implements ActionListener{
 				cadastraClienteView = new CadastraClienteView();
 				desktop.add(cadastraClienteView);
 				cadastraClienteView.setVisible(true);
+		}else if(src.equals(cadastraFabricante)) {
+				cadastraFabricanteView = new CadastraFabricanteView();
+				desktop.add(cadastraFabricanteView);
+				cadastraFabricanteView.setVisible(true);
 		}else if(src.equals(gerenciaClientes)){				
 				gerenciaClienteView = new GerenciaClienteView();
 				desktop.add(gerenciaClienteView);
