@@ -70,8 +70,8 @@ public class CadastraFabricanteView extends JInternalFrame implements ActionList
 	 */
 	private void inicializar(){
 		lbNome     = new JLabel("Nome: ");
-		lbTelefone = new JLabel("Telefone");
-		lbContato  = new JLabel("Contato");
+		lbTelefone = new JLabel("Telefone:");
+		lbContato  = new JLabel("Contato:");
 		
 		try {
 			maskTelefone = new MaskFormatter("#.####-####");
@@ -87,7 +87,7 @@ public class CadastraFabricanteView extends JInternalFrame implements ActionList
 		btnGravar   = new JButton("Gravar");
 		btnCancelar = new JButton("Cancelar");
 		
-		grade = new GridLayout(4, 2, 5, 5);
+		grade = new GridLayout(4, 2, 50, 50);
 		
 		painel = new JPanel(grade);
 	}

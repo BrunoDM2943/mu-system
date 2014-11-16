@@ -29,7 +29,7 @@ public class FabricanteController {
 		listaFabricantes.remove(fab);
 	}
 
-	public void atualizarCliente(Fabricante fab) throws Exception {
+	public void atualizarFabricante(Fabricante fab) throws Exception {
 		DaoFacade.update(fab);		
 	}
 
