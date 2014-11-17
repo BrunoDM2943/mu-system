@@ -103,7 +103,7 @@ public class Cliente {
 
 	public void setTelefone(String telefone) {
 		if(!Validator.isEmpty(telefone))
-			this.telefone = telefone.replaceAll(".","").replace("-", "");
+			this.telefone = telefone.replace(".", "").replace("-", "");
 	}
 
 	public String getEmail() {

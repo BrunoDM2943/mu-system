@@ -12,7 +12,7 @@ public class ConnectionFactory{
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String url = "jdbc:mysql://localhost/mu_system";
 	private static final String usuario = "root";
-	private static final String senha = "61417181@ab";
+	private static final String senha = "1234";
 	
 	public static Connection getConnection() throws DataAccessException {
 	        try{

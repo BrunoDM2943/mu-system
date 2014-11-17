@@ -251,7 +251,7 @@ public class GerenciaFabricanteView extends JInternalFrame implements ActionList
 			Fabricante f = tblModel.get(nome);
 			if(confirmaDeletar(f)){
 				crtl.deletarFabricante(f);
-				JOptionPane.showMessageDialog(this, "Cliente fabricante com sucesso");
+				JOptionPane.showMessageDialog(this, "Frabricante deletado com sucesso!");
 				carregarTableModel();
 				popularTabela();
 			}

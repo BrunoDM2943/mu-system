@@ -55,7 +55,7 @@ public class CadastraFabricanteView extends JInternalFrame implements ActionList
 	private void setFrame() {
 		 this.setTitle("Cadastro de fabricantes");
 		 this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		 this.setSize(400,300);
+		 this.setSize(400,150);
 		 this.setVisible(true);		 
 		 this.setClosable(true);
 		 this.setMaximizable(true);
@@ -87,7 +87,7 @@ public class CadastraFabricanteView extends JInternalFrame implements ActionList
 		btnGravar   = new JButton("Gravar");
 		btnCancelar = new JButton("Cancelar");
 		
-		grade = new GridLayout(4, 2, 50, 50);
+		grade = new GridLayout(4, 2, 5, 5);
 		
 		painel = new JPanel(grade);
 	}

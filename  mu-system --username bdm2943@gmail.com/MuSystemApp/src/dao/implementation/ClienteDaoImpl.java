@@ -108,11 +108,11 @@ public class ClienteDaoImpl implements ClienteDao, SqlBuilder{
 		con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
-		String sql = "delete from cliente where rg_cliente like ?".toUpperCase();
+		String sql = "delete from cliente where cod_cliente = ?".toUpperCase();
 		
 		try{
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, e.getRg());
+			stmt.setInt(1, e.getCod());
 			
 			System.out.println(stmt.toString());
 			
