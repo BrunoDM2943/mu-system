@@ -64,8 +64,8 @@ ALTER TABLE CLIENTE MODIFY COLUMN uf_cliente  CHAR(2) not null;
 CREATE TABLE FABRICANTE
 (
 	cod_fabricante       SMALLINT NOT NULL ,
-	nome_fabricante      VARCHAR(20) NULL ,
-	telefone_fabricante  CHAR(9) NULL ,
+	nome_fabricante      VARCHAR(20) NOT NULL ,
+	telefone_fabricante  CHAR(9) NOT NULL ,
 	nome_contato         VARCHAR(30) NULL 
 );
 

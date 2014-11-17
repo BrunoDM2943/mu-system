@@ -33,8 +33,8 @@ private Connection con;
 		try{		
 			stmt = con.prepareStatement(sql);
 			stmt.setObject(1,e.getNome());
-			stmt.setObject(2,Validator.nlv(e.getTelefone()));
-			stmt.setObject(3,e.getContato());
+			stmt.setObject(2,e.getTelefone());
+			stmt.setObject(3,Validator.nlv(e.getContato()));
 			System.out.println(stmt.toString());			
 			stmt.execute();
 			
@@ -101,11 +101,11 @@ private Connection con;
 		con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
-		String sql = "delete from fabricante where nome_fabricante like ?".toUpperCase();
+		String sql = "delete from fabricante where cod_fabricante like ?".toUpperCase();
 		
 		try{
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, e.getNome());
+			stmt.setInt(1, e.getCod());
 			
 			System.out.println(stmt.toString());
 			
@@ -166,10 +166,10 @@ private Connection con;
 		
 		while(result.next()){
 			f = new Fabricante();
-			f.setNome(result.getString(1));
-		    f.setTelefone(result.getString(2));
-		    f.setContato(result.getString(3));
-		    f.setCod(result.getInt(4));
+			f.setCod(result.getInt(1));
+			f.setNome(result.getString(2));
+		    f.setTelefone(result.getString(3));
+		    f.setContato(result.getString(4));
 		    
 		    lista.add(f);			                           
 		}

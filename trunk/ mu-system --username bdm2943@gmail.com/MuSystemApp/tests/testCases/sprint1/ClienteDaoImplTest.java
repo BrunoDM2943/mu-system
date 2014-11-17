@@ -1,4 +1,4 @@
-package testCases.frameWork;
+package testCases.sprint1;
 
 import static org.junit.Assert.*;
 
@@ -88,12 +88,6 @@ public class ClienteDaoImplTest{
 		dao.delete(cliCarregado);
 	}
 	
-	@Test
-	public void TC07LerTodosVazio() throws Exception {
-		dao.delete(cliCarregado);
-		List<Cliente> lista = dao.listAll();
-		assertTrue(lista.isEmpty());
-	}
 	
 
 	@AfterClass
