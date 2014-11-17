@@ -13,6 +13,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
+import view.acessorios.CadastraAcessorioView;
+import view.acessorios.GerenciaAcessorioView;
 import view.clientes.CadastraClienteView;
 import view.clientes.GerenciaClienteView;
 import view.fabricantes.CadastraFabricanteView;
@@ -23,23 +25,30 @@ public class Menu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	
-	private JDesktopPane desktop    	  = new JDesktopPane();
+	private JDesktopPane desktop;
 	
-	private JMenuBar  menuBar       	  = new JMenuBar();
+	private JMenuBar  menuBar;
 	
-	private JMenu     menuRegistros 	  = new JMenu("Cadastros");
-	private JMenuItem cadastraCliente     = new JMenuItem("Clientes");
-	private JMenuItem cadastraFabricante  = new JMenuItem("Fabricantes");
+	private JMenu     menuRegistros;
+	private JMenuItem cadastraCliente;
+	private JMenuItem cadastraFabricante;
+	private JMenuItem cadastraAcessorio;
 	
-	private JMenu     menuGerenciamento   = new JMenu("Gerenciamento");
-	private JMenuItem gerenciaClientes    = new JMenuItem("Clientes");
-	private JMenuItem gerenciaFabricantes = new JMenuItem("Fabricantes");
+	private JMenu     menuGerenciamento;
+	private JMenuItem gerenciaClientes;
+	private JMenuItem gerenciaFabricantes;
+	private JMenuItem gerenciaAcessorios;
 	
 	private CadastraClienteView    cadastraClienteView;
 	private CadastraFabricanteView cadastraFabricanteView;
+	private CadastraAcessorioView cadastraAcessorioView;
 	
 	private GerenciaClienteView    gerenciaClienteView;
 	private GerenciaFabricanteView gerenciaFabricanteView;
+	private GerenciaAcessorioView gerenciaAcessorioView;
+
+
+	
 	
 	public Menu() {
 		inicializar();
@@ -51,8 +60,10 @@ public class Menu extends JFrame implements ActionListener{
 	private void setActions() {
 		cadastraCliente.addActionListener(this);
 		cadastraFabricante.addActionListener(this);
+		cadastraAcessorio.addActionListener(this);
 		gerenciaClientes.addActionListener(this);
 		gerenciaFabricantes.addActionListener(this);
+		gerenciaAcessorios.addActionListener(this);
 	}
 
 
@@ -86,13 +97,15 @@ public class Menu extends JFrame implements ActionListener{
         
 		menuBar = new JMenuBar();            
 		                                                
-		menuRegistros 	= new JMenu("Cadastros");    
-		cadastraCliente = new JMenuItem("Clientes"); 
+		menuRegistros 	   = new JMenu("Cadastros");    
+		cadastraCliente    = new JMenuItem("Clientes"); 
 		cadastraFabricante = new JMenuItem("Fabricantes");
+		cadastraAcessorio  = new JMenuItem("Acessorios");
 		                                                
-		menuGerenciamento  = new JMenu("Gerenciamento");
-		gerenciaClientes   = new JMenuItem("Clientes"); 	
+		menuGerenciamento   = new JMenu("Gerenciamento");
+		gerenciaClientes    = new JMenuItem("Clientes"); 	
 		gerenciaFabricantes = new JMenuItem("Fabricantes");
+		gerenciaAcessorios  = new JMenuItem("Acessorios");
 	}
 	
 	/**
@@ -109,9 +122,11 @@ public class Menu extends JFrame implements ActionListener{
 		
 		menuRegistros.add(cadastraCliente);
 		menuRegistros.add(cadastraFabricante);
+		menuRegistros.add(cadastraAcessorio);
 		
 		menuGerenciamento.add(gerenciaClientes);
 		menuGerenciamento.add(gerenciaFabricantes);
+		menuGerenciamento.add(gerenciaAcessorios);
 	}
 
 	@Override
@@ -141,6 +156,10 @@ public class Menu extends JFrame implements ActionListener{
 				cadastraFabricanteView = new CadastraFabricanteView();
 				desktop.add(cadastraFabricanteView);
 				cadastraFabricanteView.setVisible(true);
+		}else if(src.equals(cadastraAcessorio)) {
+			cadastraAcessorioView = new CadastraAcessorioView();
+			desktop.add(cadastraAcessorioView);
+			cadastraAcessorioView.setVisible(true);			
 		}else if(src.equals(gerenciaClientes)){				
 				gerenciaClienteView = new GerenciaClienteView();
 				desktop.add(gerenciaClienteView);
@@ -148,7 +167,11 @@ public class Menu extends JFrame implements ActionListener{
 		}else if(src.equals(gerenciaFabricantes)) {
 				gerenciaFabricanteView = new GerenciaFabricanteView();
 				desktop.add(gerenciaFabricanteView);
-				gerenciaFabricanteView.setVisible(true);
+				gerenciaFabricanteView.setVisible(true);				
+		}else if(src.equals(gerenciaAcessorios)) {
+			gerenciaAcessorioView = new GerenciaAcessorioView();
+			desktop.add(gerenciaAcessorioView);
+			gerenciaAcessorioView.setVisible(true);
 		}
 		
 	}
