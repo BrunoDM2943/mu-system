@@ -1,7 +1,6 @@
-package dao.implementation;
+package dao.interfaces;
 
 import services.login.User;
-import dao.interfaces.DataAccessObject;
 
 public interface UserDao extends DataAccessObject<User> {
 	

@@ -1,17 +1,16 @@
 package testCases.sprint1;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import model.Cliente;
 
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dao.implementation.ClienteDaoImpl;
-import enums.Estado;
 import exceptions.BusinessException;
 
 
@@ -24,29 +23,30 @@ public class ClienteDaoImplTest{
 	
 	@BeforeClass
 	public static void before() throws BusinessException {
-		cliCarregado.setNome("Bruno");
+		cliCarregado.setNome("Cliente Teste");
 		cliCarregado.setBairro("Parque Boturussu");
 		cliCarregado.setCidade("Sao Paulo");
 		cliCarregado.setEmail("bdm2943@gmail.com");
 		cliCarregado.setEndereco("Dario Costa Mattos, 661");
-		cliCarregado.setRg("36.075.532-X");
+		cliCarregado.setRg("36.075.532-A");
 		cliCarregado.setTelefone("997840151");
-		cliCarregado.setUf(Estado.SP);
+		cliCarregado.setUf("SP");
 		
 		cliVazio.setNome("Nome Vazio");
 		cliVazio.setRg("19");
 		cliVazio.setEndereco("endereco vazio");
-		cliVazio.setUf(Estado.SP);
+		cliVazio.setUf("RJ");
+	}
+	
+	@After
+	public void after() throws Exception{
+		dao.delete(cliCarregado);
+		dao.delete(cliVazio);
 	}
 	
 	@Test
 	public void TC01GravarCarregado() throws Exception{
-		try{
-			dao.save(cliCarregado);			
-		}catch(BusinessException e){
-			dao.delete(cliCarregado);
-			dao.save(cliCarregado);
-		}
+		dao.save(cliCarregado);			
 	}
 	
 	@Test
@@ -62,18 +62,12 @@ public class ClienteDaoImplTest{
 	
 	@Test
 	public void TC04DeletarCliente() throws Exception{
-		try{
-			dao.save(cliCarregado);
-		}catch(BusinessException e1){
-			
-		}finally{
-			dao.delete(cliCarregado);
-		}
+		dao.save(cliCarregado);
+		dao.delete(cliCarregado);
 	}
 
 	@Test
 	public void TC05AtualizarCliente() throws Exception {
-		dao.delete(cliCarregado);
 		dao.save(cliCarregado);
 		cliCarregado.setNome("Novo nome");			
 		dao.update(cliCarregado);
@@ -84,15 +78,7 @@ public class ClienteDaoImplTest{
 	public void TC06LerTodos() throws Exception {
 		dao.save(cliCarregado);
 		List<Cliente> lista = dao.listAll();
-		assertTrue(lista.contains(cliCarregado));
-		dao.delete(cliCarregado);
+		assertTrue(lista.contains(cliCarregado));	
 	}
 	
-	
-
-	@AfterClass
-	public static void after() throws Exception {
-		dao.delete(cliCarregado);
-		dao.delete(cliVazio);
-	}
 }

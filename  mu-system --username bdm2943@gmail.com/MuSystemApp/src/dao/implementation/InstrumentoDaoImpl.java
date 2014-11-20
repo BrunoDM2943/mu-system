@@ -11,6 +11,7 @@ import model.Instrumento;
 import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.InstrumentoDao;
 import dao.interfaces.SqlBuilder;
 import exceptions.BusinessException;
 

@@ -12,6 +12,7 @@ import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
 import dao.interfaces.SqlBuilder;
+import dao.interfaces.UserDao;
 import exceptions.BusinessException;
 
 public class UserDaoImpl implements UserDao, SqlBuilder{

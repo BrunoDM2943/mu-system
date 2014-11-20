@@ -1,7 +1,6 @@
-package dao.implementation;
+package dao.interfaces;
 
 import model.Instrumento;
-import dao.interfaces.DataAccessObject;
 
 
 public interface InstrumentoDao extends DataAccessObject<Instrumento> {

@@ -1,7 +1,6 @@
-package dao.implementation;
+package dao.interfaces;
 
 import model.Acessorio;
-import dao.interfaces.DataAccessObject;
 
 public interface AcessorioDao extends DataAccessObject<Acessorio>{
 

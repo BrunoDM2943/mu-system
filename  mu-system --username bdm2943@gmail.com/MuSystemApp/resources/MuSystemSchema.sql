@@ -157,11 +157,11 @@ ALTER TABLE LUTHIER MODIFY COLUMN cod_luthier SMALLINT AUTO_INCREMENT;
 CREATE TABLE MIDIA
 (
 	cod_midia            SMALLINT NOT NULL ,
-	titulo_midia         VARCHAR(30) NULL ,
+	titulo_midia         VARCHAR(30) NOT NULL ,
 	autor_midia          VARCHAR(30) NULL ,
 	dist_midia           VARCHAR(20) NULL ,
 	tipo_midia           VARCHAR(20) NULL ,
-	preco_midia          FLOAT NULL ,
+	preco_midia          FLOAT NOT NULL ,
 	ano_midia            SMALLINT NULL 
 );
 
@@ -172,6 +172,9 @@ ALTER TABLE MIDIA
   ADD CONSTRAINT PKMIDIA PRIMARY KEY (cod_midia);
   
 ALTER TABLE MIDIA MODIFY COLUMN cod_midia SMALLINT AUTO_INCREMENT;
+ALTER TABLE MIDIA MODIFY titulo_midia VARCHAR(30) NOT NULL;
+ALTER TABLE MIDIA MODIFY preco_midia FLOAT NOT NULL;
+
 
 CREATE TABLE SERVICO
 (

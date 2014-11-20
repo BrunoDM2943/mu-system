@@ -21,7 +21,7 @@ import model.Fabricante;
 import services.auxiliarityViews.AlterarDadoView;
 import services.auxiliarityViews.GerenciamentoServices;
 import services.validator.Validator;
-import tableModels.FabricanteTableModel;
+import view.GUIModels.tableModels.FabricanteTableModel;
 import controller.FabricanteController;
 
 public class GerenciaFabricanteView extends JInternalFrame implements ActionListener, GerenciamentoServices<Fabricante>{

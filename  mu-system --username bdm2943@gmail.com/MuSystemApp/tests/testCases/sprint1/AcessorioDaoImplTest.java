@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.Acessorio;
 
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,14 +27,14 @@ public class AcessorioDaoImplTest{
 		AcessorioCarregado.setPreco(19F);			
 	}
 	
+	@After
+	public void after() throws Exception{
+		dao.delete(AcessorioCarregado);
+	}
+	
 	@Test
 	public void TC01GravarCarregado() throws Exception{
-		try{
-			dao.save(AcessorioCarregado);			
-		}catch(BusinessException e){
-			dao.delete(AcessorioCarregado);
-			dao.save(AcessorioCarregado);
-		}
+		dao.save(AcessorioCarregado);			
 	}
 	
 	@Test(expected = BusinessException.class)
@@ -45,18 +45,13 @@ public class AcessorioDaoImplTest{
 	
 	@Test
 	public void TC04DeletarAcessorio() throws Exception{
-		try{
-			dao.save(AcessorioCarregado);
-		}catch(BusinessException e1){
-			
-		}finally{
-			dao.delete(AcessorioCarregado);
-		}
+		dao.save(AcessorioCarregado);
+		dao.delete(AcessorioCarregado);
 	}
+	
 
 	@Test
 	public void TC05AtualizarAcessorio() throws Exception {
-		dao.delete(AcessorioCarregado);
 		dao.save(AcessorioCarregado);
 		AcessorioCarregado.setNome("Novo nome");			
 		dao.update(AcessorioCarregado);
@@ -68,13 +63,9 @@ public class AcessorioDaoImplTest{
 		dao.save(AcessorioCarregado);
 		List<Acessorio> lista = dao.listAll();
 		assertTrue(lista.contains(AcessorioCarregado));
-		dao.delete(AcessorioCarregado);
 	}
 	
 	
 
-	@AfterClass
-	public static void after() throws Exception {
-		dao.delete(AcessorioCarregado);
-	}
+	
 }

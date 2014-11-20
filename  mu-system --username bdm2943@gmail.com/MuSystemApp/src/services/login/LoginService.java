@@ -1,7 +1,7 @@
 package services.login;
 
-import dao.implementation.UserDao;
 import dao.implementation.UserDaoImpl;
+import dao.interfaces.UserDao;
 
 
 public class LoginService {

@@ -10,6 +10,7 @@ import java.util.List;
 import model.Acessorio;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.AcessorioDao;
 import dao.interfaces.SqlBuilder;
 import exceptions.BusinessException;
 

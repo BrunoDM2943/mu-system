@@ -3,10 +3,8 @@ package view.acessorios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,9 +27,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 	
 	private JTextField tfNome;
 	private JTextField tfPreco;
-	
-	private NumberFormat currencyFormat;
-	
+		
 	private JButton btnGravar;
 	private JButton btnCancelar;
 	
@@ -48,7 +44,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 	 * @author bruno
 	 */
 	private void setFrame() {
-		 this.setTitle("Cadastro de acessórios");
+		 this.setTitle("Cadastro de acess��rios");
 		 this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		 this.setSize(400,100);
 		 this.setVisible(true);		 
@@ -63,11 +59,10 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 	 * Inicializa os componentes da tela
 	 * @author bruno
 	 */
-	private void inicializar(){
-		currencyFormat = NumberFormat.getCurrencyInstance();
+	private void inicializar(){		
 		
 		lbNome     = new JLabel("Nome: ");
-		lbPreco    = new JLabel("Preço");
+		lbPreco    = new JLabel("Pre��o");
 			
 		tfNome     = new JTextField(30);
 		tfPreco    = new JTextField(20);
@@ -83,7 +78,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 	}
 	
 	/**
-	 * Adiciona os actions listeners aos botões
+	 * Adiciona os actions listeners aos bot��es
 	 * @author bruno
 	 */
 	private void setActions(){
