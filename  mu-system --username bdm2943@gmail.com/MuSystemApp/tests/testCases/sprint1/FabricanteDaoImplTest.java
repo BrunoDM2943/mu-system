@@ -1,6 +1,6 @@
 package testCases.sprint1;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -12,12 +12,13 @@ import org.junit.Test;
 
 import dao.excepetions.DataAccessException;
 import dao.implementation.FabricanteDaoImpl;
+import dao.interfaces.FabricanteDao;
 import exceptions.BusinessException;
 
 
 public class FabricanteDaoImplTest{
 
-	private static FabricanteDaoImpl dao = new FabricanteDaoImpl();
+	private static FabricanteDao dao = new FabricanteDaoImpl();
 	private static Fabricante fabricanteCarregado = new Fabricante();
 	private static Fabricante fabricanteVazio     = new Fabricante();
 	
@@ -60,8 +61,8 @@ public class FabricanteDaoImplTest{
 	@Test
 	public void TC05AtualizarFabricante() throws Exception {	
 		dao.save(fabricanteCarregado);
-		fabricanteCarregado.setNome("Novo nome");			
-		dao.update(fabricanteCarregado);		
+		fabricanteCarregado.setNome("Novo nome");
+		dao.update(fabricanteCarregado);
 	}
 	
 	@Test
@@ -69,6 +70,18 @@ public class FabricanteDaoImplTest{
 		dao.save(fabricanteCarregado);
 		List<Fabricante> lista = dao.listAll();
 		assertTrue(lista.contains(fabricanteCarregado));
+	}
+	
+	@Test
+	public void TC07LerPorId() throws Exception{
+		dao.save(fabricanteCarregado);
+		Fabricante novo = dao.getFabricanteById(fabricanteCarregado.getCod());
+		assertTrue(fabricanteCarregado.equals(novo));
+	}
+	
+	@Test
+	public void TC08LerPorIdVazio() throws Exception{
+		assertNull(dao.getFabricanteById(0));
 	}
 
 }

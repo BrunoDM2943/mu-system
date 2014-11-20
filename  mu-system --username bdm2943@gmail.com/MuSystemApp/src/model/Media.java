@@ -1,7 +1,7 @@
 package model;
 
-import dao.annotations.DataAccessClass;
 import services.validator.Validator;
+import dao.annotations.DataAccessClass;
 import exceptions.BusinessException;
 
 @DataAccessClass(daoImpl="dao.implementation.MediaDaoImpl")

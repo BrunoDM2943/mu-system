@@ -83,9 +83,11 @@ CREATE TABLE INSTRUMENTO
 	cod_fabricante       SMALLINT NOT NULL ,
 	nome_instrumento     VARCHAR(20) NULL ,
 	tipo_instrumento     VARCHAR(20) NULL ,
-	preco_instrumento    FLOAT NULL ,
+	preco_instrumento    FLOAT NOT NULL ,
 	especificacao        VARCHAR(100) NULL 
 );
+
+ALTER TABLE INSTRUMENTO MODIFY COLUMN preco_instrumento FLOAT NOT NULL;
 
 CREATE UNIQUE INDEX XPKINSTRUMENTO ON INSTRUMENTO
 (cod_instrumento   ASC);

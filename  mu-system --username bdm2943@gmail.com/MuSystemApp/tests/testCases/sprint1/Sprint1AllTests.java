@@ -9,8 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		AcessorioDaoImplTest.class,
 		ClienteDaoImplTest.class,
 		FabricanteDaoImplTest.class,
-		MidiaDaoImplTest.class
-		
+		MidiaDaoImplTest.class,
+		InstrumentoDaoImplTest.class		
 })
 public class Sprint1AllTests {
 

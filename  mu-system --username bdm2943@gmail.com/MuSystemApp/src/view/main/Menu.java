@@ -19,9 +19,9 @@ import view.clientes.CadastraClienteView;
 import view.clientes.GerenciaClienteView;
 import view.fabricantes.CadastraFabricanteView;
 import view.fabricantes.GerenciaFabricanteView;
+import view.luthier.CadastraLuthierView;
 import view.media.CadastraMediaView;
 import view.media.GerenciaMediaView;
-import view.luthier.CadastraLuthierView;
 import view.luthier.GerenciaLuthierView;
 
 public class Menu extends JFrame implements ActionListener {

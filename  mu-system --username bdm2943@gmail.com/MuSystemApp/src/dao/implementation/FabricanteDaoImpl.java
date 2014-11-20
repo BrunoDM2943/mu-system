@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import services.validator.Validator;
 import model.Fabricante;
+import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
 import dao.interfaces.FabricanteDao;
@@ -167,10 +167,10 @@ private Connection con;
 		
 		while(result.next()){
 			f = new Fabricante();
-			f.setCod(result.getInt(1));
-			f.setNome(result.getString(2));
-		    f.setTelefone(result.getString(3));
-		    f.setContato(result.getString(4));
+			f.setCod(result.getInt("cod_fabricante"));
+			f.setNome(result.getString("nome_fabricante"));
+		    f.setTelefone(result.getString("telefone_fabricante"));
+		    f.setContato(result.getString("nome_contato"));		 
 		    
 		    lista.add(f);			                           
 		}
@@ -200,6 +200,42 @@ private Connection con;
 		sql.append("nome_contato = ? ");
 		sql.append("where cod_fabricante = ?");
 		return sql.toString().toUpperCase();
+	}
+
+	/**
+	 * Busca um fabricante na base pelo seu
+	 * id
+	 * 
+	 * @param id id do fabricante
+	 * @return Fabricante
+	 * @throws Exception
+	 * 
+	 * @author bruno
+	 */
+	@Override
+	public Fabricante getFabricanteById(int id) throws Exception {
+		Fabricante fabricante = null;
+		ResultSet result      = null;
+		String sql = "select * from fabricante where cod_fabricante = ? ".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, id);
+				
+		stmt.execute();	
+		result = stmt.getResultSet();
+		
+		
+		
+		while(result.next()){
+			fabricante = new Fabricante();
+			fabricante.setCod(result.getInt("cod_fabricante"));
+			fabricante.setNome(result.getString("nome_fabricante"));
+		    fabricante.setTelefone(result.getString("telefone_fabricante"));
+		    fabricante.setContato(result.getString("nome_contato"));		    		    			                          
+		}
+				
+		return fabricante;
 	}
 	
 }
