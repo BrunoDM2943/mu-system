@@ -16,6 +16,8 @@ public class Instrumento {
 	private float preco;
 	
 	private String especificacao;
+	
+	private Fabricante fabricante;
 
 	public int getCod() {
 		return cod;
@@ -65,6 +67,16 @@ public class Instrumento {
 		this.especificacao = especificacao;
 	}
 	
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) throws BusinessException {
+		if(fabricante == null)
+			throw new BusinessException("O fabricante de um produto não pode ficar vazio!");
+		this.fabricante = fabricante;
+	}
+
 	@Override	
 	public String toString() {
 		return nome;

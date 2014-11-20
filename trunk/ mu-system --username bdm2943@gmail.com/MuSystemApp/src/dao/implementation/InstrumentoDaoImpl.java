@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Fabricante;
 import model.Instrumento;
 import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.FabricanteDao;
 import dao.interfaces.InstrumentoDao;
 import dao.interfaces.SqlBuilder;
 import exceptions.BusinessException;
@@ -22,8 +24,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 	/**
 	 * Grava um instrumento na base
 	 * de dados
-	 */
-		
+	 */		
 	@Override
 	public void save(Instrumento e) throws Exception {
 		con = ConnectionFactory.getConnection();
@@ -34,11 +35,11 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 		String sql = insertBuilder();
 		try{
 			stmt = con.prepareStatement(sql);
-	//		stmt.setObject(1, e.getCODIGOFABRICANTE());
-			stmt.setObject(2,e.getNome());
-			stmt.setObject(3,e.getTipo());
-			stmt.setObject(4,e.getPreco());
-			stmt.setObject(5,Validator.nlv(e.getEspecificacao()));
+			stmt.setObject(1, e.getFabricante().getCod());
+			stmt.setObject(2, e.getNome());
+			stmt.setObject(3, e.getTipo());
+			stmt.setObject(4, e.getPreco());
+			stmt.setObject(5, Validator.nlv(e.getEspecificacao()));
 			System.out.println(stmt.toString());			
 			stmt.execute();
 		
@@ -59,8 +60,6 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 	 * @return Id do Instrumento
 	 * @throws Exception
 	 */
-	
-	
 	private int getIdInstrumento() throws Exception {
 		String sql = "SELECT cod_instrumento FROM INSTRUMENTO ORDER BY cod_instrumento DESC LIMIT 1";
 		
@@ -78,8 +77,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 	 * @param e Instrumento
 	 * 
 	 * @author guilherme
-	 */
-	
+	 */	
 	private boolean isNovoInstrumento(Instrumento e) throws Exception{
 		PreparedStatement stmt = null;
 		ResultSet result       = null;
@@ -94,8 +92,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 			result = stmt.getResultSet();
 		}catch(SQLException e1){
 			throw new DataAccessException(e1.getMessage());
-		}
-		
+		}		
 		return !result.next();
 	}
 
@@ -103,18 +100,16 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 	 * Deleta um instrumento da base de
 	 * dados
 	 */
-	
-
 	@Override
 	public void delete(Instrumento e) throws Exception {
 		con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
-		String sql = "delete from instrumento where nome_instrumento like ?".toUpperCase();
+		String sql = "delete from instrumento where cod_instrumento = ?".toUpperCase();
 		
 		try{
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, e.getNome());
+			stmt.setInt(1, e.getCod());
 			
 			System.out.println(stmt.toString());
 			
@@ -136,11 +131,11 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 
 		try{
 			stmt = con.prepareStatement(sql);
-//			stmt.setObject(1,e.getCODIGOFABRICANTE());
-			stmt.setObject(2,e.getNome());
-			stmt.setObject(3,e.getTipo());
-			stmt.setObject(4,e.getPreco());
-			stmt.setObject(5,e.getEspecificacao());
+			stmt.setObject(1,e.getNome());
+			stmt.setObject(2,e.getTipo());
+			stmt.setObject(3,e.getPreco());
+			stmt.setObject(4,e.getEspecificacao());
+			stmt.setObject(5, e.getCod());
 			System.out.println(stmt.toString());
 			
 			stmt.execute();
@@ -155,29 +150,36 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 
 	@Override
 	public List<Instrumento> listAll() throws Exception {
-		List<Instrumento> lista = new ArrayList<Instrumento>();
-		Instrumento i  = null;
-		String sql = "select * from fabricante".toUpperCase();
+		List<Instrumento> lista 	 = new ArrayList<Instrumento>();
+		FabricanteDao instrumentoDao = new FabricanteDaoImpl();
+		ResultSet result 			 = null;	
+		Instrumento instrumento      = null;
+		Fabricante fabricante    	 = null;
+		
+		String sql = "select * from instrumento".toUpperCase();
 		
 		con = ConnectionFactory.getConnection();		
 		PreparedStatement stmt = con.prepareStatement(sql);
-		ResultSet    result = null;		
+			
 		stmt.execute();	
 		result = stmt.getResultSet();
 		
 		while(result.next()){
-			i = new Instrumento();
-//			i.setCODIGOFABRICANTE(result.getString(1));
-		    i.setNome(result.getString(2));
-		    i.setTipo(result.getString(3));
-		    i.setPreco(result.getFloat(4));
-		    i.setEspecificacao(result.getString(5));
-		    i.setCod(result.getInt(6));
-		    lista.add(i);			                           
+			instrumento = new Instrumento();			
+			instrumento.setCod(result.getInt("cod_instrumento"));
+			fabricante = instrumentoDao.getFabricanteById(result.getInt("cod_fabricante"));
+			instrumento.setFabricante(fabricante);
+		    instrumento.setNome(result.getString("nome_instrumento"));
+		    instrumento.setTipo(result.getString("tipo_instrumento"));
+		    instrumento.setPreco(result.getFloat("preco_instrumento"));
+		    instrumento.setEspecificacao(result.getString("especificacao"));
+		    
+		    lista.add(instrumento);			                           
 		}
 		return lista;
 	}
 
+	
 	@Override
 	public String insertBuilder() {
 		StringBuilder sql = new StringBuilder();
@@ -188,6 +190,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 		sql.append("tipo_instrumento,");
 		sql.append("preco_instrumento,");
 		sql.append("especificacao");
+		sql.append(")");
 		sql.append(" values ");
 		sql.append("(?, ?, ?, ?, ?)");
 		return sql.toString().toUpperCase();
@@ -196,16 +199,13 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 	@Override
 	public String updateBuilder() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("update instrumento");
-		sql.append("set cod_fabricante = ?, ");
-		sql.append("nome_instrumento = ?, ");
+		sql.append("update instrumento ");
+		sql.append("set nome_instrumento = ?, ");
 		sql.append("tipo_instrumento = ?, ");
 		sql.append("preco_instrumento = ?, ");
 		sql.append("especificacao = ?");
 		sql.append("where cod_instrumento = ?");
-		return null;
-	}
-
-	
+		return sql.toString().toUpperCase();
+	}	
 	
 }
