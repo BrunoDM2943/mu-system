@@ -13,8 +13,6 @@ import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
 import dao.interfaces.LuthierDao;
 import dao.interfaces.SqlBuilder;
-import enums.Especialidade;
-import enums.Estado;
 import exceptions.BusinessException;
 
 public class LuthierDaoImpl implements LuthierDao, SqlBuilder{
