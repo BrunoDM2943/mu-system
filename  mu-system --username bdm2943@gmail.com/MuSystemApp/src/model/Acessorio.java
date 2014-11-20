@@ -9,7 +9,6 @@ public class Acessorio {
 	
 	private int codigo;
 	
-
 	private String nome;
 	
 	private float preco;

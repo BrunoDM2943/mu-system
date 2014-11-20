@@ -28,7 +28,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 	private JLabel lbPreco;
 	
 	private JTextField tfNome;
-	private JFormattedTextField tfPreco;
+	private JTextField tfPreco;
 	
 	private NumberFormat currencyFormat;
 	
@@ -50,7 +50,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 	private void setFrame() {
 		 this.setTitle("Cadastro de acessórios");
 		 this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		 this.setSize(400,300);
+		 this.setSize(400,100);
 		 this.setVisible(true);		 
 		 this.setClosable(true);
 		 this.setMaximizable(true);
@@ -70,8 +70,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 		lbPreco    = new JLabel("Preço");
 			
 		tfNome     = new JTextField(30);
-		tfPreco    = new JFormattedTextField(currencyFormat);
-		tfPreco.setColumns(10);
+		tfPreco    = new JTextField(20);
 				
 		lbNome.setLabelFor(tfPreco);
 		lbPreco.setLabelFor(tfPreco);
@@ -124,7 +123,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 				acessorio.setPreco(Float.parseFloat(tfPreco.getText()));				
 				
 				new AcessorioController().gravarAcessorio(acessorio);	
-				JOptionPane.showMessageDialog(painel, "Cliente gravado com sucesso!");
+				JOptionPane.showMessageDialog(painel, "Acessorio gravado com sucesso!");
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(painel, e1.getMessage());
 			}

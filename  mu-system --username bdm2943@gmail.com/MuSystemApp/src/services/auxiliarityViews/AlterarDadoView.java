@@ -24,6 +24,8 @@ public abstract class AlterarDadoView{
 			return Long.parseLong(novoCampo.toString());
 		if(clazz.equals(Date.class))
 			return Date.valueOf(novoCampo.toString());
+		if(clazz.equals(Float.class))
+			return Float.parseFloat(novoCampo.toString());		
 		if(clazz.equals(Estado.class)){
 			try{
 				return Estado.valueOf(novoCampo.toString());
@@ -31,6 +33,7 @@ public abstract class AlterarDadoView{
 				throw new ClassCastException("Não há um estado chamado " + novoCampo.toString());
 			}
 		}
+		
 			
 		return "";		
 	}	

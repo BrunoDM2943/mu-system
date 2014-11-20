@@ -90,13 +90,13 @@ public class AcessorioTableModel extends AbstractTableModel{
 	}
 	
 	public Acessorio get(String nome) throws Exception{	
-		Acessorio fab = new Acessorio();
+		Acessorio acessorio = new Acessorio();
 		try {
-			fab.setNome(nome);
+			acessorio.setNome(nome);
 		} catch (BusinessException e) {
 			throw new Exception("Nenhum acessorio foi selecionado");
 		}
-		int idx = listaAcessorios.indexOf(fab);
+		int idx = listaAcessorios.indexOf(acessorio);
 		return listaAcessorios.get(idx);
 	}
 
