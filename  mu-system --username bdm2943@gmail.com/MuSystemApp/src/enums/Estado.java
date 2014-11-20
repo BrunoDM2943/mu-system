@@ -52,6 +52,4 @@ public enum Estado {
 		return sigla;
 	}
 
-	
-
 }
