@@ -19,6 +19,8 @@ import view.clientes.CadastraClienteView;
 import view.clientes.GerenciaClienteView;
 import view.fabricantes.CadastraFabricanteView;
 import view.fabricantes.GerenciaFabricanteView;
+import view.livro.CadastraLivroView;
+import view.livro.GerenciaLivroView;
 import view.luthier.CadastraLuthierView;
 import view.media.CadastraMediaView;
 import view.media.GerenciaMediaView;
@@ -32,31 +34,35 @@ public class Menu extends JFrame implements ActionListener {
 
 	private JMenuBar menuBar;
 
-	private JMenu menuRegistros;
+	private JMenu     menuRegistros;
 	private JMenuItem cadastraCliente;
 	private JMenuItem cadastraLuthier;
 	private JMenuItem cadastraFabricante;
 	private JMenuItem cadastraAcessorio;
+	private JMenuItem cadastraLivro;
 	private JMenuItem cadastraMidia;
 
-	private JMenu menuGerenciamento;
+	private JMenu     menuGerenciamento;
 	private JMenuItem gerenciaClientes;
 	private JMenuItem gerenciaLuthier;
 	private JMenuItem gerenciaFabricantes;
 	private JMenuItem gerenciaAcessorios;
+	private JMenuItem gerenciaLivro;
 	private JMenuItem gerenciaMedia;
 
-	private CadastraClienteView cadastraClienteView;
-	private CadastraLuthierView cadastraLuthierView;
+	private CadastraClienteView    cadastraClienteView;
+	private CadastraLuthierView    cadastraLuthierView;
 	private CadastraFabricanteView cadastraFabricanteView;
-	private CadastraAcessorioView cadastraAcessorioView;
-	private CadastraMediaView cadastraMediaView;
+	private CadastraAcessorioView  cadastraAcessorioView;
+	private CadastraLivroView      cadastraLivroView;
+	private CadastraMediaView      cadastraMediaView;
 
-	private GerenciaClienteView gerenciaClienteView;
-	private GerenciaLuthierView gerenciaLuthierView;
+	private GerenciaClienteView    gerenciaClienteView;
+	private GerenciaLuthierView    gerenciaLuthierView;
 	private GerenciaFabricanteView gerenciaFabricanteView;
-	private GerenciaAcessorioView gerenciaAcessorioView;
-	private GerenciaMediaView gerenciaMediaView;
+	private GerenciaAcessorioView  gerenciaAcessorioView;
+	private GerenciaLivroView      gerenciaLivroView;
+	private GerenciaMediaView      gerenciaMediaView;
 
 	public Menu() {
 		inicializar();
@@ -70,11 +76,13 @@ public class Menu extends JFrame implements ActionListener {
 		cadastraLuthier.addActionListener(this);
 		cadastraFabricante.addActionListener(this);
 		cadastraAcessorio.addActionListener(this);
+		cadastraLivro.addActionListener(this);
 		cadastraMidia.addActionListener(this);
 		gerenciaClientes.addActionListener(this);
 		gerenciaLuthier.addActionListener(this);
 		gerenciaFabricantes.addActionListener(this);
 		gerenciaAcessorios.addActionListener(this);
+		gerenciaLivro.addActionListener(this);
 		gerenciaMedia.addActionListener(this);
 	}
 
@@ -108,19 +116,21 @@ public class Menu extends JFrame implements ActionListener {
 
 		menuBar = new JMenuBar();
 
-		menuRegistros = new JMenu("Cadastros");
-		cadastraCliente = new JMenuItem("Clientes");
-		cadastraLuthier = new JMenuItem("Luthier");
+		menuRegistros      = new JMenu("Cadastros");
+		cadastraCliente    = new JMenuItem("Clientes");
+		cadastraLuthier    = new JMenuItem("Luthier");
 		cadastraFabricante = new JMenuItem("Fabricantes");
-		cadastraAcessorio = new JMenuItem("Acessorios");
-		cadastraMidia = new JMenuItem("Media");
+		cadastraAcessorio  = new JMenuItem("Acessorios");
+		cadastraLivro      = new JMenuItem("Livros");
+		cadastraMidia      = new JMenuItem("Media");
 
-		menuGerenciamento = new JMenu("Gerenciamento");
-		gerenciaClientes = new JMenuItem("Clientes");
-		gerenciaLuthier = new JMenuItem("Luthier");
+		menuGerenciamento   = new JMenu("Gerenciamento");
+		gerenciaClientes    = new JMenuItem("Clientes");
+		gerenciaLuthier     = new JMenuItem("Luthier");
 		gerenciaFabricantes = new JMenuItem("Fabricantes");
-		gerenciaAcessorios = new JMenuItem("Acessorios");
-		gerenciaMedia = new JMenuItem("Media");
+		gerenciaAcessorios  = new JMenuItem("Acessorios");
+		gerenciaLivro       = new JMenuItem("Livros");
+		gerenciaMedia       = new JMenuItem("Media");
 	}
 
 	/**
@@ -139,12 +149,14 @@ public class Menu extends JFrame implements ActionListener {
 		menuRegistros.add(cadastraLuthier);
 		menuRegistros.add(cadastraFabricante);
 		menuRegistros.add(cadastraAcessorio);
+		menuRegistros.add(cadastraLivro);
 		menuRegistros.add(cadastraMidia);
 
 		menuGerenciamento.add(gerenciaClientes);
 		menuGerenciamento.add(gerenciaLuthier);
 		menuGerenciamento.add(gerenciaFabricantes);
 		menuGerenciamento.add(gerenciaAcessorios);
+		menuGerenciamento.add(gerenciaLivro);
 		menuGerenciamento.add(gerenciaMedia);
 	}
 
@@ -182,10 +194,14 @@ public class Menu extends JFrame implements ActionListener {
 			cadastraAcessorioView = new CadastraAcessorioView();
 			desktop.add(cadastraAcessorioView);
 			cadastraAcessorioView.setVisible(true);
+		} else if (src.equals(cadastraLivro)) {
+			cadastraLivroView = new CadastraLivroView();
+			desktop.add(cadastraLivroView);
+			cadastraLivroView.setVisible(true);
 		} else if (src.equals(cadastraMidia)) {
 			cadastraMediaView = new CadastraMediaView();
 			desktop.add(cadastraMediaView);
-			cadastraAcessorioView.setVisible(true);
+			cadastraMediaView.setVisible(true);
 		} else if (src.equals(gerenciaClientes)) {
 			gerenciaClienteView = new GerenciaClienteView();
 			desktop.add(gerenciaClienteView);
@@ -202,6 +218,10 @@ public class Menu extends JFrame implements ActionListener {
 			gerenciaAcessorioView = new GerenciaAcessorioView();
 			desktop.add(gerenciaAcessorioView);
 			gerenciaAcessorioView.setVisible(true);
+		} else if (src.equals(gerenciaLivro)) {
+			gerenciaLivroView = new GerenciaLivroView();
+			desktop.add(gerenciaLivroView);
+			gerenciaLivroView.setVisible(true);
 		} else if (src.equals(gerenciaMedia)) {
 			gerenciaMediaView = new GerenciaMediaView();
 			desktop.add(gerenciaMediaView);

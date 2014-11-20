@@ -112,8 +112,9 @@ public class Luthier {
 		this.email = email;
 	}
 
-	//FIXME Fazer validação
 	public void setEspecialidade(String especialidade) throws BusinessException {
+		if(Validator.isEmpty(especialidade))
+			throw new BusinessException("A especialidade do Luthier deve ser selecionada!");
 		this.especialidade = especialidade;
 	}
 
