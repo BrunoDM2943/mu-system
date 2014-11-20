@@ -19,6 +19,7 @@ import view.clientes.CadastraClienteView;
 import view.clientes.GerenciaClienteView;
 import view.fabricantes.CadastraFabricanteView;
 import view.fabricantes.GerenciaFabricanteView;
+import view.luthier.CadastraLuthierView;
 
 public class Menu extends JFrame implements ActionListener{
 
@@ -31,17 +32,20 @@ public class Menu extends JFrame implements ActionListener{
 	
 	private JMenu     menuRegistros;
 	private JMenuItem cadastraCliente;
+	private JMenuItem cadastraLuthier;
 	private JMenuItem cadastraFabricante;
 	private JMenuItem cadastraAcessorio;
 	
 	private JMenu     menuGerenciamento;
 	private JMenuItem gerenciaClientes;
+	private JMenuItem gerenciaLuthier;
 	private JMenuItem gerenciaFabricantes;
 	private JMenuItem gerenciaAcessorios;
 	
 	private CadastraClienteView    cadastraClienteView;
+	private CadastraLuthierView    cadastraLuthierView;
 	private CadastraFabricanteView cadastraFabricanteView;
-	private CadastraAcessorioView cadastraAcessorioView;
+	private CadastraAcessorioView  cadastraAcessorioView;
 	
 	private GerenciaClienteView    gerenciaClienteView;
 	private GerenciaFabricanteView gerenciaFabricanteView;
@@ -59,9 +63,11 @@ public class Menu extends JFrame implements ActionListener{
 	
 	private void setActions() {
 		cadastraCliente.addActionListener(this);
+		cadastraLuthier.addActionListener(this);
 		cadastraFabricante.addActionListener(this);
 		cadastraAcessorio.addActionListener(this);
 		gerenciaClientes.addActionListener(this);
+		gerenciaLuthier.addActionListener(this);
 		gerenciaFabricantes.addActionListener(this);
 		gerenciaAcessorios.addActionListener(this);
 	}
@@ -99,11 +105,13 @@ public class Menu extends JFrame implements ActionListener{
 		                                                
 		menuRegistros 	   = new JMenu("Cadastros");    
 		cadastraCliente    = new JMenuItem("Clientes"); 
+		cadastraLuthier    = new JMenuItem("Luthier");
 		cadastraFabricante = new JMenuItem("Fabricantes");
 		cadastraAcessorio  = new JMenuItem("Acessorios");
 		                                                
 		menuGerenciamento   = new JMenu("Gerenciamento");
-		gerenciaClientes    = new JMenuItem("Clientes"); 	
+		gerenciaClientes    = new JMenuItem("Clientes");
+		gerenciaLuthier     = new JMenuItem("Luthier");
 		gerenciaFabricantes = new JMenuItem("Fabricantes");
 		gerenciaAcessorios  = new JMenuItem("Acessorios");
 	}
@@ -121,10 +129,12 @@ public class Menu extends JFrame implements ActionListener{
 		menuBar.add(menuGerenciamento);
 		
 		menuRegistros.add(cadastraCliente);
+		menuRegistros.add(cadastraLuthier);
 		menuRegistros.add(cadastraFabricante);
 		menuRegistros.add(cadastraAcessorio);
 		
 		menuGerenciamento.add(gerenciaClientes);
+		menuGerenciamento.add(gerenciaLuthier);
 		menuGerenciamento.add(gerenciaFabricantes);
 		menuGerenciamento.add(gerenciaAcessorios);
 	}
@@ -152,6 +162,10 @@ public class Menu extends JFrame implements ActionListener{
 				cadastraClienteView = new CadastraClienteView();
 				desktop.add(cadastraClienteView);
 				cadastraClienteView.setVisible(true);
+		}else if(src.equals(cadastraLuthier)) {
+				cadastraLuthierView = new CadastraLuthierView();
+				desktop.add(cadastraLuthierView);
+				cadastraLuthierView.setVisible(true);
 		}else if(src.equals(cadastraFabricante)) {
 				cadastraFabricanteView = new CadastraFabricanteView();
 				desktop.add(cadastraFabricanteView);
