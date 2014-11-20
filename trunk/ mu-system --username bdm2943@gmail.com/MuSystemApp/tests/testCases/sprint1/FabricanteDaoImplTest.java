@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.Fabricante;
 
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,14 +29,15 @@ public class FabricanteDaoImplTest{
 		fabricanteCarregado.setTelefone("19");			
 	}
 	
+	@After
+	public void after() throws Exception{
+		dao.delete(fabricanteCarregado);
+		dao.delete(fabricanteVazio);
+	}
+	
 	@Test
 	public void TC01GravarCarregado() throws Exception{
-		try{
-			dao.save(fabricanteCarregado);			
-		}catch(BusinessException e){
-			dao.delete(fabricanteCarregado);
-			dao.save(fabricanteCarregado);
-		}
+		dao.save(fabricanteCarregado);			
 	}
 	
 	@Test(expected = DataAccessException.class)
@@ -52,22 +53,15 @@ public class FabricanteDaoImplTest{
 	
 	@Test
 	public void TC04DeletarFabricante() throws Exception{
-		try{
-			dao.save(fabricanteCarregado);
-		}catch(BusinessException e1){
-			
-		}finally{
-			dao.delete(fabricanteCarregado);
-		}
+		dao.save(fabricanteCarregado);
+		dao.delete(fabricanteCarregado);
 	}
 
 	@Test
-	public void TC05AtualizarFabricante() throws Exception {
-		dao.delete(fabricanteCarregado);
+	public void TC05AtualizarFabricante() throws Exception {	
 		dao.save(fabricanteCarregado);
 		fabricanteCarregado.setNome("Novo nome");			
-		dao.update(fabricanteCarregado);
-		
+		dao.update(fabricanteCarregado);		
 	}
 	
 	@Test
@@ -75,14 +69,6 @@ public class FabricanteDaoImplTest{
 		dao.save(fabricanteCarregado);
 		List<Fabricante> lista = dao.listAll();
 		assertTrue(lista.contains(fabricanteCarregado));
-		dao.delete(fabricanteCarregado);
 	}
-	
-	
 
-	@AfterClass
-	public static void after() throws Exception {
-		dao.delete(fabricanteCarregado);
-		dao.delete(fabricanteVazio);
-	}
 }

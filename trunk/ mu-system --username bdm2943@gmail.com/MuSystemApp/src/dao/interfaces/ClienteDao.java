@@ -1,7 +1,6 @@
-package dao.implementation;
+package dao.interfaces;
 
 import model.Cliente;
-import dao.interfaces.DataAccessObject;
 
 public interface ClienteDao extends DataAccessObject<Cliente>{
 

@@ -1,4 +1,4 @@
-package tableModels;
+package view.GUIModels.tableModels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import model.Cliente;
-import enums.Estado;
 import exceptions.BusinessException;
 
 public class ClienteTableModel extends AbstractTableModel{
@@ -83,7 +82,7 @@ public class ClienteTableModel extends AbstractTableModel{
 		case 4:    
 			return String.class;
 		case 5:    
-			return Estado.class;
+			return String.class;
 		case 6:    
 			return String.class;
 		case 7:    
@@ -120,7 +119,7 @@ public class ClienteTableModel extends AbstractTableModel{
 				c.setCidade(String.valueOf(aValue));
 				break;
 			case 5:
-				c.setUf(Estado.valueOf(String.valueOf(aValue)));
+				c.setUf(String.valueOf(aValue));
 				break;
 			case 6:
 				c.setTelefone(String.valueOf(aValue));

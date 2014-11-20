@@ -2,7 +2,6 @@ package model;
 
 import services.validator.Validator;
 import dao.annotations.DataAccessClass;
-import enums.Estado;
 import exceptions.BusinessException;
 
 @DataAccessClass(daoImpl = "dao.implementation.ClienteDaoImpl")
@@ -18,7 +17,7 @@ public class Cliente {
 	
 	private String cidade;
 	
-	private Estado uf;
+	private String uf;
 	
 	private String endereco;
 	
@@ -73,15 +72,13 @@ public class Cliente {
 		this.cidade = cidade;
 	}
 
-	public Estado getUf() {
-		if(null == uf)
-			return null;
+	public String getUf() {
 		return uf;
 	}
 	
 
-	public void setUf(Estado uf) throws BusinessException {
-		if(uf == null)
+	public void setUf(String uf) throws BusinessException {
+		if(Validator.isEmpty(uf))
 			throw new BusinessException("O Estado de um cliente não pode ser vazio!");
 		this.uf = uf;
 	}

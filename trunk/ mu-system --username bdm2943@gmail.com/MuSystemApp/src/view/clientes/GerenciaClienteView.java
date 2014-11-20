@@ -21,7 +21,7 @@ import model.Cliente;
 import services.auxiliarityViews.AlterarDadoView;
 import services.auxiliarityViews.GerenciamentoServices;
 import services.validator.Validator;
-import tableModels.ClienteTableModel;
+import view.GUIModels.tableModels.ClienteTableModel;
 import controller.ClienteController;
 
 public class GerenciaClienteView extends JInternalFrame implements ActionListener, GerenciamentoServices<Cliente>{

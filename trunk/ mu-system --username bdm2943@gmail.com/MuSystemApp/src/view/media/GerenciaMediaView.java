@@ -1,4 +1,4 @@
-package view.acessorios;
+package view.media;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -17,14 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-import model.Acessorio;
+import model.Media;
 import services.auxiliarityViews.AlterarDadoView;
 import services.auxiliarityViews.GerenciamentoServices;
 import services.validator.Validator;
-import view.GUIModels.tableModels.AcessorioTableModel;
-import controller.AcessorioController;
+import view.GUIModels.tableModels.MediaTableModel;
+import controller.MediaController;
 
-public class GerenciaAcessorioView extends JInternalFrame implements ActionListener, GerenciamentoServices<Acessorio>{
+public class GerenciaMediaView extends JInternalFrame implements ActionListener, GerenciamentoServices<Media>{
 
 	private static final long serialVersionUID = -7087120418438369171L;
 	
@@ -33,8 +33,8 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	private JPanel painelBotoes;
 	private JScrollPane painelScroll;
 	
-	private JTable tblAcessorios;	
-	private AcessorioTableModel tblModel;
+	private JTable tblMedia;	
+	private MediaTableModel tblModel;
 	
 	private JLabel lbFiltro;
 	
@@ -45,14 +45,14 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	private JButton btnCancelar;
 	private JButton btnPesquisar;
 	
-	private TableRowSorter<AcessorioTableModel> sorter;
+	private TableRowSorter<MediaTableModel> sorter;
 	
-	private static final int COL_NOME = 0; 
+	private static final int COL_TITULO = 0; 
 	
-	private AcessorioController crtl = new AcessorioController();	
+	private MediaController crtl = new MediaController();	
 	
 	
-	public GerenciaAcessorioView() {
+	public GerenciaMediaView() {
 		try {
 			inicializar();
 			setLayout();
@@ -70,7 +70,7 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	 * @author bruno
 	 */
 	private void setFrame() {
-		 this.setTitle("Gerenciador de Acessorios");
+		 this.setTitle("Gerenciador de Medias");
 		 this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		 this.setSize(480,360);
 		 this.setVisible(true);		 
@@ -98,17 +98,17 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 		painel = new JPanel(new BorderLayout(10, 10));
 		painelFiltro = new JPanel(new FlowLayout(FlowLayout.LEFT, 5,5));
 		painelFiltro.setSize(getWidth(), 20);
-		painelScroll = new JScrollPane(tblAcessorios);
+		painelScroll = new JScrollPane(tblMedia);
 		painelBotoes = new JPanel(new FlowLayout(FlowLayout.LEFT, 5,5));
 	}
 	
 	/**
-	 * Carrega a tabela de Acessorios
+	 * Carrega a tabela de Medias
 	 * @throws Exception 
 	 */
 	private void carregarTabela() throws Exception {
 		carregarTableModel();			
-		tblAcessorios = new JTable();
+		tblMedia = new JTable();
 		popularTabela();		
 	}
 	
@@ -116,9 +116,9 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	 * Popula a tabela
 	 */
 	private void popularTabela() {
-		tblAcessorios.setModel(tblModel);
-		sorter = new TableRowSorter<AcessorioTableModel>(tblModel);
-		tblAcessorios.setRowSorter(sorter);
+		tblMedia.setModel(tblModel);
+		sorter = new TableRowSorter<MediaTableModel>(tblModel);
+		tblMedia.setRowSorter(sorter);
 	}
 
 	/**
@@ -127,8 +127,8 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	 * @throws Exception 
 	 */
 	private void carregarTableModel() throws Exception{
-		List<Acessorio> listaAcessorios = crtl.listarTodos();
-		tblModel = new AcessorioTableModel(listaAcessorios);		
+		List<Media> listaMedias = crtl.listarTodos();
+		tblModel = new MediaTableModel(listaMedias);		
 	}
 	
 	/**
@@ -162,6 +162,7 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 		btnDeletar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
 		btnCancelar.addActionListener(this);
+		
 	}
 
 	@Override
@@ -181,12 +182,12 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	}
 	
 	/**
-	 * Confirma a deleção de um Acessorio
+	 * Confirma a deleção de um Media
 	 * @param c
 	 * @return
 	 */
-	private boolean confirmaDeletar(Acessorio c) {
-		String msg = "Deseja realmente deletar o Acessorio " + c + " do sistema?";
+	private boolean confirmaDeletar(Media media) {
+		String msg = "Deseja realmente deletar a media " + media + " do sistema?";
 		int opt = JOptionPane.showConfirmDialog(this, msg);
 		System.out.println(opt);
 		return opt == 0;
@@ -194,21 +195,21 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 		
 	@Override
 	public void alterar() {
-		int idx = tblAcessorios.getSelectedRow();
-		int col = tblAcessorios.getSelectedColumn();
+		int idx = tblMedia.getSelectedRow();
+		int col = tblMedia.getSelectedColumn();
 		try{
 			validarIndice(idx);
-
+			
 			String nomeCampo = tblModel.getColumnName(col);			
 			Class<?> clazz = tblModel.getColumnClass(col);
 			Object e = AlterarDadoView.alterarDado(clazz, nomeCampo);
 			
 			if(!Validator.isEmpty(String.valueOf(e))){				
 				tblModel.setValueAt(e, idx, col);
-				String rg = (String) tblAcessorios.getValueAt(idx, COL_NOME);
-				Acessorio cli = tblModel.get(rg);
-				crtl.atualizarAcessorio(cli);
-				JOptionPane.showMessageDialog(this, "Acessorio atualizado com sucesso");
+				String titulo = (String) tblMedia.getValueAt(idx, COL_TITULO);
+				Media cli = tblModel.get(titulo);
+				crtl.atualizarMedia(cli);
+				JOptionPane.showMessageDialog(this, "Media atualizado com sucesso");
 				carregarTableModel();
 				popularTabela();
 			}
@@ -226,11 +227,11 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	 */
 	private void validarIndice(int idx) throws Exception {
 		if(idx == -1)
-			throw new Exception("Nenhum Acessorio foi selecionado");		
+			throw new Exception("Nenhum Media foi selecionado");		
 	}
 
 	@Override
-	public List<Acessorio> procurar() {
+	public List<Media> procurar() {
 		String filtro = tfFiltro.getText();
 		if(filtro.length() == 0){
 			sorter.setRowFilter(null);
@@ -242,14 +243,14 @@ public class GerenciaAcessorioView extends JInternalFrame implements ActionListe
 	
 	@Override
 	public void deletar() {
-		int idx = tblAcessorios.getSelectedRow();
+		int idx = tblMedia.getSelectedRow();
 		try {
 			validarIndice(idx);
-			String nome = (String) tblAcessorios.getValueAt(idx, COL_NOME);
-			Acessorio c = tblModel.get(nome);
+			String rg = (String) tblMedia.getValueAt(idx, COL_TITULO);
+			Media c = tblModel.get(rg);
 			if(confirmaDeletar(c)){
-				crtl.deletarAcessorio(c);
-				JOptionPane.showMessageDialog(this, "Acessorio removido com sucesso");
+				crtl.deletarMedia(c);
+				JOptionPane.showMessageDialog(this, "Media removido com sucesso");
 				carregarTableModel();
 				popularTabela();
 			}

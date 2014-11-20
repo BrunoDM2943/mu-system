@@ -180,7 +180,7 @@ public class CadastraClienteView extends JInternalFrame implements ActionListene
 				cliente.setRg(tfRg.getText());
 				cliente.setEndereco(tfEndereco.getText());
 				cliente.setTelefone(tfTelefone.getText());
-				cliente.setUf((Estado)cbEstado.getSelectedItem());
+				cliente.setUf(cbEstado.getSelectedItem().toString());
 				
 				new ClienteController().gravarCliente(cliente);	
 				JOptionPane.showMessageDialog(painel, "Cliente gravado com sucesso!");

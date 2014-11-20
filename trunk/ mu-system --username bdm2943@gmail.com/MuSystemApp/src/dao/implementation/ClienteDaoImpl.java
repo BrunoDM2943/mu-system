@@ -11,8 +11,8 @@ import model.Cliente;
 import services.validator.Validator;
 import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
+import dao.interfaces.ClienteDao;
 import dao.interfaces.SqlBuilder;
-import enums.Estado;
 import exceptions.BusinessException;
 
 public class ClienteDaoImpl implements ClienteDao, SqlBuilder{
@@ -29,7 +29,7 @@ public class ClienteDaoImpl implements ClienteDao, SqlBuilder{
 		PreparedStatement stmt = null;
 		
 		if(!isNovoCliente(e))
-			throw new BusinessException("O cliente " + e + "já está cadastrado!");
+			throw new BusinessException("O cliente " + e + " já está cadastrado!");
 		String sql = insertBuilder();
 		try{		
 			stmt = con.prepareStatement(sql);
@@ -183,7 +183,7 @@ public class ClienteDaoImpl implements ClienteDao, SqlBuilder{
 		    c.setEndereco(result.getString(3));
 		    c.setBairro(result.getString(4));
 		    c.setCidade(result.getString(5));
-		    c.setUf(Estado.valueOf(result.getString(6)));
+		    c.setUf(result.getString(6));
 		    c.setTelefone(result.getString(7));
 		    c.setEmail(result.getString(8));
 		    c.setCod(result.getInt(9));
