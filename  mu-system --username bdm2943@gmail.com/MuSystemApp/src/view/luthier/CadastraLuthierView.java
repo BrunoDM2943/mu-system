@@ -188,10 +188,10 @@ public class CadastraLuthierView extends JInternalFrame implements ActionListene
 				luthier.setBairro(tfBairro.getText());
 				luthier.setCidade(tfCidade.getText());
 				luthier.setCpf(tfCPF.getText());
-				luthier.setUf((Estado)cbEstado.getSelectedItem());
+				luthier.setUf(cbEstado.getSelectedItem().toString());
 				luthier.setTelefone(tfTelefone.getText());
 				luthier.setEmail(tfEmail.getText());
-				luthier.setEspecialidade((Especialidade)cbEspecialiade.getSelectedItem());
+				luthier.setEspecialidade(cbEspecialiade.getSelectedItem().toString());
 				
 				new LuthierController().gravarLuthier(luthier);	
 				JOptionPane.showMessageDialog(painel, "Luthier gravado com sucesso!");

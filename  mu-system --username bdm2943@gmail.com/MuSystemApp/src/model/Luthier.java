@@ -21,13 +21,13 @@ public class Luthier {
 
 	private String cidade;
 	
-	private Estado uf;
+	private String uf;
 	
 	private String telefone;
 	
 	private String email;
 	
-	private Especialidade especialidade;
+	private String especialidade;
 	
 	public int getCod() {
 		return cod;
@@ -53,7 +53,7 @@ public class Luthier {
 		return cidade;
 	}
 	
-	public Estado getUf() {
+	public String getUf() {
 		return uf;
 	}
 
@@ -65,7 +65,7 @@ public class Luthier {
 		return email;
 	}
 
-	public Especialidade getEspecialidade() {
+	public String getEspecialidade() {
 		return especialidade;
 	}
 
@@ -84,7 +84,7 @@ public class Luthier {
 	public void setCpf(String cpf) throws BusinessException {
 		if (Validator.isEmpty(cpf))
 			throw new BusinessException("O CPF de um luthier não pode ser vazio!");
-		this.cpf = cpf;
+		this.cpf = cpf.replaceAll("\\.","").replaceAll("\\-", "");
 	}
 
 	public void setEndereco(String endereco) throws BusinessException {
@@ -101,20 +101,21 @@ public class Luthier {
 		this.cidade = cidade;
 	}
 
-	public void setUf(Estado uf) {
+	public void setUf(String uf) {
 		this.uf = uf;
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		if(!Validator.isEmpty(telefone))
+			this.telefone = telefone.replace(".", "").replace("-", "");
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	//Fazer validação
-	public void setEspecialidade(Especialidade especialidade) throws BusinessException {
+	//FIXME Fazer validação
+	public void setEspecialidade(String especialidade) throws BusinessException {
 		this.especialidade = especialidade;
 	}
 
