@@ -27,7 +27,7 @@ public class AcessorioDaoImpl implements AcessorioDao, SqlBuilder{
 		PreparedStatement stmt = null;
 		
 		if(!isNovoAcessorio(e))
-			throw new BusinessException("O acessorio " + e + "já está cadastrado!");
+			throw new BusinessException("O acessorio " + e + " já está cadastrado!");
 		String sql = insertBuilder();
 		try{		
 			stmt = con.prepareStatement(sql);
