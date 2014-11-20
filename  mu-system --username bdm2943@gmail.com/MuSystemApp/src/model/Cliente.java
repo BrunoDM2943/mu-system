@@ -52,7 +52,7 @@ public class Cliente {
 	public void setRg(String rg) throws BusinessException {
 		if(Validator.isEmpty(rg))
 			throw new BusinessException("O Rg de um cliente não pode ser vazio!");
-		this.rg = rg.replaceAll("\\.","").replaceAll("\\-", "");
+		this.rg = rg.replace(".","").replace("-","");
 	}
 
 	public String getBairro() {

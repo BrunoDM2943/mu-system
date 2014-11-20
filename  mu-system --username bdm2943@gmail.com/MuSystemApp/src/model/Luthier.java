@@ -2,8 +2,6 @@ package model;
 
 import services.validator.Validator;
 import dao.annotations.DataAccessClass;
-import enums.Especialidade;
-import enums.Estado;
 import exceptions.BusinessException;
 
 @DataAccessClass(daoImpl = "dao.implementation.LuthierDaoImpl")
@@ -84,7 +82,7 @@ public class Luthier {
 	public void setCpf(String cpf) throws BusinessException {
 		if (Validator.isEmpty(cpf))
 			throw new BusinessException("O CPF de um luthier não pode ser vazio!");
-		this.cpf = cpf.replaceAll("\\.","").replaceAll("\\-", "");
+		this.cpf = cpf.replace("\\","").replace("-","").replace(".", "");
 	}
 
 	public void setEndereco(String endereco) throws BusinessException {

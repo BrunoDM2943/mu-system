@@ -136,17 +136,24 @@ ALTER TABLE LIVRO MODIFY COLUMN cod_livro SMALLINT AUTO_INCREMENT;
 
 CREATE TABLE LUTHIER
 (
-	cod_luthier          SMALLINT NOT NULL ,
-	nome_luthier         VARCHAR(30) NULL ,
-	cpf_luthier          CHAR(11) NULL ,
-	endereco_luthier     VARCHAR(50) NULL ,
-	bairro_luthier       VARCHAR(20) NULL ,
-	cidade_luthier       VARCHAR(20) NULL ,
-	uf_luthier           CHAR(2) NULL ,
-	telefone_luthier     CHAR(9) NULL ,
-	email_luthier        VARCHAR(30) NULL ,
-	especialidade_luthier VARCHAR(20) NULL 
+	cod_luthier          SMALLINT NOT NULL,
+	nome_luthier         VARCHAR(30) NOT NULL,
+	cpf_luthier          CHAR(11) NOT NULL,
+	endereco_luthier     VARCHAR(50) NOT NULL,
+	bairro_luthier       VARCHAR(20) NULL,
+	cidade_luthier       VARCHAR(20) NULL,
+	uf_luthier           CHAR(2) NULL,
+	telefone_luthier     CHAR(9) NOT NULL,
+	email_luthier        VARCHAR(30) NULL,
+	especialidade_luthier VARCHAR(20) NOT NULL 
 );
+
+ALTER TABLE LUTHIER MODIFY COLUMN nome_luthier VARCHAR(30) NOT NULL;
+ALTER TABLE LUTHIER MODIFY COLUMN cpf_luthier CHAR(11) NOT NULL;
+ALTER TABLE LUTHIER MODIFY COLUMN endereco_luthier VARCHAR(50) NOT NULL;
+ALTER TABLE LUTHIER MODIFY COLUMN especialidade_luthier VARCHAR(20) NOT NULL;
+ALTER TABLE LUTHIER MODIFY COLUMN telefone_luthier CHAR(9) NOT NULL;
+	
 
 CREATE UNIQUE INDEX XPKLUTHIER ON LUTHIER
 (cod_luthier   ASC);
