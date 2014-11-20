@@ -99,12 +99,12 @@ ALTER TABLE INSTRUMENTO MODIFY COLUMN cod_instrumento SMALLINT AUTO_INCREMENT;
 
 CREATE TABLE ITEM
 (
-	cod_venda            SMALLINT NOT NULL ,
-	cod_midia            SMALLINT NOT NULL ,
-	cod_acessorio        SMALLINT NOT NULL ,
-	cod_instrumento      SMALLINT NOT NULL ,
-	quantidade           SMALLINT NULL ,
-	cod_livro            SMALLINT NOT NULL ,
+	cod_venda            SMALLINT NOT NULL,
+	cod_midia            SMALLINT NULL,
+	cod_acessorio        SMALLINT NULL,
+	cod_instrumento      SMALLINT NULL,
+	quantidade           SMALLINT NOT NULL,
+	cod_livro            SMALLINT NULL,
 	cod_item             SMALLINT NOT NULL 
 );
 

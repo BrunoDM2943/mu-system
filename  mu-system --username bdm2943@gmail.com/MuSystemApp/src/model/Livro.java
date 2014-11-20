@@ -5,7 +5,7 @@ import dao.annotations.DataAccessClass;
 import exceptions.BusinessException;
 
 @DataAccessClass(daoImpl="dao.implementation.LivroDaoImpl")
-public class Livro {
+public class Livro implements Comercializavel {
 	
 	private int codigo;
 	

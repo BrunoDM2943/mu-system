@@ -109,7 +109,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 		
 		try{
 			stmt = con.prepareStatement(sql);
-			stmt.setInt(1, e.getCod());
+			stmt.setInt(1, e.getCodigo());
 			
 			System.out.println(stmt.toString());
 			
@@ -135,7 +135,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 			stmt.setObject(2,e.getTipo());
 			stmt.setObject(3,e.getPreco());
 			stmt.setObject(4,e.getEspecificacao());
-			stmt.setObject(5, e.getCod());
+			stmt.setObject(5, e.getCodigo());
 			System.out.println(stmt.toString());
 			
 			stmt.execute();

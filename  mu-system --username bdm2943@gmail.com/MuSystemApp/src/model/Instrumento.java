@@ -5,7 +5,7 @@ import dao.annotations.DataAccessClass;
 import exceptions.BusinessException;
 
 @DataAccessClass(daoImpl = "dao.implementation.InstrumentoDaoImpl")
-public class Instrumento {
+public class Instrumento implements Comercializavel{
 	
 	private int cod;
 	
@@ -19,7 +19,7 @@ public class Instrumento {
 	
 	private Fabricante fabricante;
 
-	public int getCod() {
+	public int getCodigo() {
 		return cod;
 	}
 
