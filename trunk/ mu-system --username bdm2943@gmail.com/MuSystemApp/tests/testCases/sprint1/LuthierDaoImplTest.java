@@ -19,7 +19,6 @@ public class LuthierDaoImplTest{
 
 	private static LuthierDao dao = new LuthierDaoImpl();
 	private static Luthier luthierCarregado = new Luthier();
-	private static Luthier luthierVazio     = new Luthier();
 	
 	
 	@BeforeClass
@@ -32,17 +31,12 @@ public class LuthierDaoImplTest{
 		luthierCarregado.setCpf("36.075.532-A");
 		luthierCarregado.setTelefone("997840151");
 		luthierCarregado.setUf("SP");
-//		
-//		luthierVazio.setNome("Nome Vazio");
-//		luthierVazio.setRg("19");
-//		luthierVazio.setEndereco("endereco vazio");
-//		luthierVazio.setUf("RJ");
+		luthierCarregado.setEspecialidade("PIANO");
 	}
 	
 	@After
 	public void after() throws Exception{
 		dao.delete(luthierCarregado);
-		dao.delete(luthierVazio);
 	}
 	
 	@Test
@@ -50,25 +44,21 @@ public class LuthierDaoImplTest{
 		dao.save(luthierCarregado);			
 	}
 	
-	@Test
-	public void TC02GravarVazio() throws Exception{
-		dao.save(luthierVazio);
-	}
 	
 	@Test(expected = BusinessException.class)
-	public void TC03GravarDuasVezes() throws Exception{
+	public void TC02GravarDuasVezes() throws Exception{
 		dao.save(luthierCarregado);
 		dao.save(luthierCarregado);
 	}
 	
 	@Test
-	public void TC04DeletarLuthier() throws Exception{
+	public void TC03DeletarLuthier() throws Exception{
 		dao.save(luthierCarregado);
 		dao.delete(luthierCarregado);
 	}
 
 	@Test
-	public void TC05AtualizarLuthier() throws Exception {
+	public void TC04AtualizarLuthier() throws Exception {
 		dao.save(luthierCarregado);
 		luthierCarregado.setNome("Novo nome");			
 		dao.update(luthierCarregado);
@@ -76,7 +66,7 @@ public class LuthierDaoImplTest{
 	}
 	
 	@Test
-	public void TC06LerTodos() throws Exception {
+	public void TC05LerTodos() throws Exception {
 		dao.save(luthierCarregado);
 		List<Luthier> lista = dao.listAll();
 		assertTrue(lista.contains(luthierCarregado));	

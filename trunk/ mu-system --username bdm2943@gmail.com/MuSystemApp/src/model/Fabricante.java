@@ -39,9 +39,11 @@ public class Fabricante {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
-		if(!Validator.isEmpty(telefone))
-			this.telefone = telefone.replace(".", "").replace("-", "");
+	public void setTelefone(String telefone) throws BusinessException {
+		this.telefone = telefone.replace(".", "").replace("-", "");
+		if(Validator.isEmpty(this.telefone))
+			throw new BusinessException("O telefone de um fabricante não pode ficar vazio!");
+			
 	}
 
 	public String getContato() {
