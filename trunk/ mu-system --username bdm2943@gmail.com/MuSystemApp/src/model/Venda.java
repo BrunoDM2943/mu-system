@@ -11,12 +11,23 @@ public class Venda {
 	
 	private float total = 0f;
 	
+	private int codigo;
+	
+
 	public Venda() {
 		 itens = new ArrayList<Item>();
 	}
 	
 	public List<Item> getItens() {
 		return itens;
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	public void setItens(List<Item> itens) {
