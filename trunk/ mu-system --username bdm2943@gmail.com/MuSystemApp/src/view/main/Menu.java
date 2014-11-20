@@ -22,51 +22,49 @@ import view.fabricantes.GerenciaFabricanteView;
 import view.media.CadastraMediaView;
 import view.media.GerenciaMediaView;
 import view.luthier.CadastraLuthierView;
+import view.luthier.GerenciaLuthierView;
 
-public class Menu extends JFrame implements ActionListener{
+public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private JDesktopPane desktop;
-	
-	private JMenuBar  menuBar;
-	
-	private JMenu     menuRegistros;
+
+	private JMenuBar menuBar;
+
+	private JMenu menuRegistros;
 	private JMenuItem cadastraCliente;
 	private JMenuItem cadastraLuthier;
 	private JMenuItem cadastraFabricante;
 	private JMenuItem cadastraAcessorio;
 	private JMenuItem cadastraMidia;
-	
-	private JMenu     menuGerenciamento;
+
+	private JMenu menuGerenciamento;
 	private JMenuItem gerenciaClientes;
 	private JMenuItem gerenciaLuthier;
 	private JMenuItem gerenciaFabricantes;
 	private JMenuItem gerenciaAcessorios;
 	private JMenuItem gerenciaMedia;
-	
-	private CadastraClienteView    cadastraClienteView;
-	private CadastraLuthierView    cadastraLuthierView;
+
+	private CadastraClienteView cadastraClienteView;
+	private CadastraLuthierView cadastraLuthierView;
 	private CadastraFabricanteView cadastraFabricanteView;
-	private CadastraAcessorioView  cadastraAcessorioView;
+	private CadastraAcessorioView cadastraAcessorioView;
 	private CadastraMediaView cadastraMediaView;
-	
-	private GerenciaClienteView    gerenciaClienteView;
+
+	private GerenciaClienteView gerenciaClienteView;
+	private GerenciaLuthierView gerenciaLuthierView;
 	private GerenciaFabricanteView gerenciaFabricanteView;
 	private GerenciaAcessorioView gerenciaAcessorioView;
 	private GerenciaMediaView gerenciaMediaView;
 
-
-
-	
 	public Menu() {
 		inicializar();
 		setLayout();
 		setActions();
 		setFrame();
 	}
-	
+
 	private void setActions() {
 		cadastraCliente.addActionListener(this);
 		cadastraLuthier.addActionListener(this);
@@ -80,9 +78,9 @@ public class Menu extends JFrame implements ActionListener{
 		gerenciaMedia.addActionListener(this);
 	}
 
-
 	/**
 	 * Configuar o frame da janela
+	 * 
 	 * @author bruno
 	 */
 	private void setFrame() {
@@ -92,58 +90,57 @@ public class Menu extends JFrame implements ActionListener{
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
-		this.setSize(800, 600);		
+		this.setSize(800, 600);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setContentPane(desktop);		
-		
+		this.setContentPane(desktop);
 
-		
 		this.setJMenuBar(menuBar);
-		this.setVisible(true);		 
+		this.setVisible(true);
 	}
-	
+
 	/**
 	 * Inicializa os componentes da tela
+	 * 
 	 * @author bruno
 	 */
-	private void inicializar(){
-		desktop = new JDesktopPane();        
-        
-		menuBar = new JMenuBar();            
-		                                                
-		menuRegistros 	   = new JMenu("Cadastros");    
-		cadastraCliente    = new JMenuItem("Clientes"); 
-		cadastraLuthier    = new JMenuItem("Luthier");
+	private void inicializar() {
+		desktop = new JDesktopPane();
+
+		menuBar = new JMenuBar();
+
+		menuRegistros = new JMenu("Cadastros");
+		cadastraCliente = new JMenuItem("Clientes");
+		cadastraLuthier = new JMenuItem("Luthier");
 		cadastraFabricante = new JMenuItem("Fabricantes");
-		cadastraAcessorio  = new JMenuItem("Acessorios");
-		cadastraMidia      = new JMenuItem("Media");
-		                                                
-		menuGerenciamento   = new JMenu("Gerenciamento");
-		gerenciaClientes    = new JMenuItem("Clientes");
-		gerenciaLuthier     = new JMenuItem("Luthier");
+		cadastraAcessorio = new JMenuItem("Acessorios");
+		cadastraMidia = new JMenuItem("Media");
+
+		menuGerenciamento = new JMenu("Gerenciamento");
+		gerenciaClientes = new JMenuItem("Clientes");
+		gerenciaLuthier = new JMenuItem("Luthier");
 		gerenciaFabricantes = new JMenuItem("Fabricantes");
-		gerenciaAcessorios  = new JMenuItem("Acessorios");
-		gerenciaMedia       = new JMenuItem("Media");
+		gerenciaAcessorios = new JMenuItem("Acessorios");
+		gerenciaMedia = new JMenuItem("Media");
 	}
-	
+
 	/**
-	 * Adiciona os componentes na 
-	 * tela
+	 * Adiciona os componentes na tela
+	 * 
 	 * @author bruno
 	 */
-	private void setLayout(){
+	private void setLayout() {
 		desktop.setVisible(true);
 		desktop.setLayout(null);
-		
-		menuBar.add(menuRegistros);	
+
+		menuBar.add(menuRegistros);
 		menuBar.add(menuGerenciamento);
-		
+
 		menuRegistros.add(cadastraCliente);
 		menuRegistros.add(cadastraLuthier);
 		menuRegistros.add(cadastraFabricante);
 		menuRegistros.add(cadastraAcessorio);
 		menuRegistros.add(cadastraMidia);
-		
+
 		menuGerenciamento.add(gerenciaClientes);
 		menuGerenciamento.add(gerenciaLuthier);
 		menuGerenciamento.add(gerenciaFabricantes);
@@ -153,7 +150,7 @@ public class Menu extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object src = e.getSource();		
+		Object src = e.getSource();
 		try {
 			makesInternalFrame(src);
 		} catch (PropertyVetoException e1) {
@@ -163,51 +160,54 @@ public class Menu extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * Cria um frame interno baseado no bot��o
-	 * selecionado
+	 * Cria um frame interno baseado no bot��o selecionado
 	 * 
 	 * @param src
-	 * @throws PropertyVetoException 
+	 * @throws PropertyVetoException
 	 */
 	private void makesInternalFrame(Object src) throws PropertyVetoException {
-		if(src.equals(cadastraCliente)){				
-				cadastraClienteView = new CadastraClienteView();
-				desktop.add(cadastraClienteView);
-				cadastraClienteView.setVisible(true);
-		}else if(src.equals(cadastraLuthier)) {
-				cadastraLuthierView = new CadastraLuthierView();
-				desktop.add(cadastraLuthierView);
-				cadastraLuthierView.setVisible(true);
-		}else if(src.equals(cadastraFabricante)) {
-				cadastraFabricanteView = new CadastraFabricanteView();
-				desktop.add(cadastraFabricanteView);
-				cadastraFabricanteView.setVisible(true);
-		}else if(src.equals(cadastraAcessorio)) {
+		if (src.equals(cadastraCliente)) {
+			cadastraClienteView = new CadastraClienteView();
+			desktop.add(cadastraClienteView);
+			cadastraClienteView.setVisible(true);
+		} else if (src.equals(cadastraLuthier)) {
+			cadastraLuthierView = new CadastraLuthierView();
+			desktop.add(cadastraLuthierView);
+			cadastraLuthierView.setVisible(true);
+		} else if (src.equals(cadastraFabricante)) {
+			cadastraFabricanteView = new CadastraFabricanteView();
+			desktop.add(cadastraFabricanteView);
+			cadastraFabricanteView.setVisible(true);
+		} else if (src.equals(cadastraAcessorio)) {
 			cadastraAcessorioView = new CadastraAcessorioView();
 			desktop.add(cadastraAcessorioView);
 			cadastraAcessorioView.setVisible(true);
-		}else if(src.equals(cadastraMidia)){
+		} else if (src.equals(cadastraMidia)) {
 			cadastraMediaView = new CadastraMediaView();
 			desktop.add(cadastraMediaView);
 			cadastraAcessorioView.setVisible(true);
-		}else if(src.equals(gerenciaClientes)){				
-				gerenciaClienteView = new GerenciaClienteView();
-				desktop.add(gerenciaClienteView);
-				gerenciaClienteView.setVisible(true);
-		}else if(src.equals(gerenciaFabricantes)) {
-				gerenciaFabricanteView = new GerenciaFabricanteView();
-				desktop.add(gerenciaFabricanteView);
-				gerenciaFabricanteView.setVisible(true);				
-		}else if(src.equals(gerenciaAcessorios)) {
+		} else if (src.equals(gerenciaClientes)) {
+			gerenciaClienteView = new GerenciaClienteView();
+			desktop.add(gerenciaClienteView);
+			gerenciaClienteView.setVisible(true);
+		} else if (src.equals(gerenciaLuthier)) {
+			gerenciaLuthierView = new GerenciaLuthierView();
+			desktop.add(gerenciaLuthierView);
+			gerenciaLuthierView.setVisible(true);
+		} else if (src.equals(gerenciaFabricantes)) {
+			gerenciaFabricanteView = new GerenciaFabricanteView();
+			desktop.add(gerenciaFabricanteView);
+			gerenciaFabricanteView.setVisible(true);
+		} else if (src.equals(gerenciaAcessorios)) {
 			gerenciaAcessorioView = new GerenciaAcessorioView();
 			desktop.add(gerenciaAcessorioView);
 			gerenciaAcessorioView.setVisible(true);
-		}else if(src.equals(gerenciaMedia)){
+		} else if (src.equals(gerenciaMedia)) {
 			gerenciaMediaView = new GerenciaMediaView();
 			desktop.add(gerenciaMediaView);
 			gerenciaMediaView.setVisible(true);
 		}
-		
+
 	}
 
 }

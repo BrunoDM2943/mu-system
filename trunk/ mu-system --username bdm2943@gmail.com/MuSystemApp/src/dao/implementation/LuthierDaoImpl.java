@@ -182,16 +182,16 @@ public class LuthierDaoImpl implements LuthierDao, SqlBuilder{
 		
 		while(result.next()){
 			f = new Luthier();
-			f.setNome(result.getString(1));
-		    f.setCpf(result.getString(2));
-		    f.setEndereco(result.getString(3));
-		    f.setBairro(result.getString(4));
-		    f.setCidade(result.getString(5));
-		    f.setUf(Estado.valueOf(result.getString(6)));
-		    f.setTelefone(result.getString(7));
-		    f.setEmail(result.getString(8));
-		    f.setEspecialidade(Especialidade.valueOf(result.getString(9)));
-		    f.setCod(result.getInt(10));
+			f.setCod(result.getInt(1));
+			f.setNome(result.getString(2));
+		    f.setCpf(result.getString(3));
+		    f.setEndereco(result.getString(4));
+		    f.setBairro(result.getString(5));
+		    f.setCidade(result.getString(6));
+		    f.setUf(result.getString(7));
+		    f.setTelefone(result.getString(8));
+		    f.setEmail(result.getString(9));
+		    f.setEspecialidade(result.getString(10));
 		    
 		    lista.add(f);			                           
 		}
