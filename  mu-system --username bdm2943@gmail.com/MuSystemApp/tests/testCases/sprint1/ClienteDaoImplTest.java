@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import dao.excepetions.DataAccessException;
 import dao.implementation.ClienteDaoImpl;
 import exceptions.BusinessException;
 
@@ -33,7 +34,6 @@ public class ClienteDaoImplTest{
 		cliCarregado.setUf("SP");
 		
 		cliVazio.setNome("Nome Vazio");
-		cliVazio.setRg("19");
 		cliVazio.setEndereco("endereco vazio");
 		cliVazio.setUf("RJ");
 	}
@@ -49,7 +49,7 @@ public class ClienteDaoImplTest{
 		dao.save(cliCarregado);			
 	}
 	
-	@Test
+	@Test(expected = DataAccessException.class)
 	public void TC02GravarVazio() throws Exception{
 		dao.save(cliVazio);
 	}
