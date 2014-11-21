@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Venda {
@@ -12,6 +13,8 @@ public class Venda {
 	private float total = 0f;
 	
 	private int codigo;
+	
+	private Date data_venda;
 	
 
 	public Venda() {
@@ -53,5 +56,13 @@ public class Venda {
 	public double somar(){
 		itens.forEach(e -> total += e.getTotalItem());		
 		return total;		
+	}
+
+	public Date getData_venda() {
+		return data_venda;
+	}
+
+	public void setData_venda(Date data_venda) {
+		this.data_venda = data_venda;
 	}
 }
