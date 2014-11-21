@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dao.annotations.DataAccessClass;
+
+@DataAccessClass(daoImpl = "dao.implementation.VendaDaoImpl")
 public class Venda {
 
 	private List<Item> itens;
@@ -14,7 +17,7 @@ public class Venda {
 	
 	private int codigo;
 	
-	private Date data_venda;
+	private Date dataVenda;
 	
 
 	public Venda() {
@@ -53,16 +56,17 @@ public class Venda {
 		return itens.remove(e);
 	}
 	
-	public double somar(){
-		itens.forEach(e -> total += e.getTotalItem());		
+	public float somar(){
+		itens.forEach(e -> e.somar());
+		itens.forEach(e -> total += e.getTotalItem());
 		return total;		
 	}
 
-	public Date getData_venda() {
-		return data_venda;
+	public Date getDataVenda() {
+		return dataVenda;
 	}
 
-	public void setData_venda(Date data_venda) {
-		this.data_venda = data_venda;
+	public void setDataVenda(Date dataVenda) {
+		this.dataVenda = dataVenda;
 	}
 }

@@ -3,6 +3,7 @@ package dao.implementation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,21 +29,8 @@ public class ItemDaoImpl implements ItemDao{
 	@Override
 	public void save(List<Item> itens) throws Exception {
 		con = ConnectionFactory.getConnection();
-		PreparedStatement stmt = null;
-		String coluna = "";
-		String sql = "";
-		Comercializavel comex = null;
-		Class<? extends Comercializavel> clazz = null;
 		for(Item item : itens){
-			comex = item.getComercilizavel();
-			clazz = comex.getClass();
-			coluna = getColunaByClazz(clazz);
-			sql = insertBuilder(coluna);
-			stmt = con.prepareStatement(sql);
-			stmt.setInt(1, comex.getCodigo());
-			stmt.setInt(2, item.getVenda().getCodigo());
-			stmt.setInt(3, item.getQtd());			
-			stmt.execute();
+			save(item);
 		}
 	}
 	
@@ -146,6 +134,69 @@ public class ItemDaoImpl implements ItemDao{
 		
 		item.setQtd(qtd);
 		return item;
+		
+	}
+
+	@Override
+	public void save(Item e) throws Exception {
+		PreparedStatement stmt = null;
+		String coluna = "";
+		String sql = "";
+		Comercializavel comex = null;
+		Class<? extends Comercializavel> clazz = null;
+		
+		comex = e.getComercilizavel();
+		clazz = comex.getClass();
+		coluna = getColunaByClazz(clazz);
+		sql = insertBuilder(coluna);
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, comex.getCodigo());
+		stmt.setInt(2, e.getVenda().getCodigo());
+		stmt.setInt(3, e.getQtd());
+		
+		System.out.println(stmt.toString());
+		stmt.execute();
+		
+		e.setCodigo(getCodigoItem());
+	}
+
+	private int getCodigoItem() throws SQLException {
+		String sql = "SELECT cod_item FROM ITEM ORDER BY cod_item DESC LIMIT 1";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.execute();
+		
+		ResultSet result = stmt.getResultSet();
+		result.next();
+		return result.getInt(1);		
+	}
+
+	@Override
+	public void delete(Item e) throws Exception {
+		PreparedStatement stmt = null;
+		String sql = "delete from item where cod_item = ?".toUpperCase();
+		
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, e.getCodigo());
+		stmt.execute();
+		
+	}
+
+	@Override
+	public void update(Item e) throws Exception {}
+
+	@Override
+	public List<Item> listAll() throws Exception {return null;}
+	
+	@Override
+	public Item getById(int cod) throws Exception {return null;}
+
+	@Override
+	public void deleteAll(List<Item> itens) throws Exception {
+		con = ConnectionFactory.getConnection();
+		for(Item item : itens){
+			delete(item);
+		}
 		
 	}
 

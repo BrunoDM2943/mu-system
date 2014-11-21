@@ -10,6 +10,8 @@ public class Item {
 	
 	private float total;
 	
+	private int codigo;
+	
 	public Item(Comercializavel comercializavel) {
 		 this.comercilizavel = comercializavel;
 	}
@@ -40,6 +42,14 @@ public class Item {
 
 	public void setVenda(Venda venda) {
 		this.venda = venda;
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	public void somar(){

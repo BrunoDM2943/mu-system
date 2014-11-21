@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		FabricanteDaoImplTest.class,
 		MidiaDaoImplTest.class,
 		InstrumentoDaoImplTest.class,
-		LuthierDaoImplTest.class
+		LuthierDaoImplTest.class,
+		VendaDaoImplTest.class
 })
 public class Sprint1AllTests {
 
