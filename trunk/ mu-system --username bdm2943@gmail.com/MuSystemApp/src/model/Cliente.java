@@ -35,7 +35,7 @@ public class Cliente {
 		this.cod = cod;
 	}
 
-	public String getNome() {
+	public String getNome() {	
 		return nome;
 	}
 

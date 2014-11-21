@@ -12,9 +12,8 @@ import dao.connection.ConnectionFactory;
 import dao.excepetions.DataAccessException;
 import dao.interfaces.ClienteDao;
 import dao.interfaces.ItemDao;
-import dao.interfaces.VendaDao;
 import dao.interfaces.SqlBuilder;
-import exceptions.BusinessException;
+import dao.interfaces.VendaDao;
 
 public class VendaDaoImpl implements VendaDao, SqlBuilder {
 
@@ -32,15 +31,15 @@ public class VendaDaoImpl implements VendaDao, SqlBuilder {
 		String sql = insertBuilder();
 		try{		
 			stmt = con.prepareStatement(sql);
-			stmt.setObject(1,e.getCliente());
-			stmt.setObject(2,e.getItens());
-			stmt.setObject(3,e.somar());
-			stmt.setObject(4, e.getData_venda());
+			stmt.setObject(1,e.getCliente().getCod());
+			stmt.setObject(2,e.somar());
+			stmt.setObject(3, e.getDataVenda());
 			System.out.println(stmt.toString());			
 			stmt.execute();
 			
 			e.setCodigo(getIdVenda());
 			
+			new ItemDaoImpl().save(e.getItens());
 		}catch(SQLException e1){
 			throw new DataAccessException(e1.getMessage());
 		}finally{
@@ -94,7 +93,7 @@ public class VendaDaoImpl implements VendaDao, SqlBuilder {
 			venda.setCliente(daoCli.getById(cod_cli));
 			venda.setItens(daoItem.listAll(cod_venda));
 			venda.somar();
-			venda.setData_venda(result.getDate(4));
+			venda.setDataVenda(result.getDate(4));
 		    lista.add(venda);			                           
 		}
 		return lista;
@@ -127,8 +126,24 @@ public class VendaDaoImpl implements VendaDao, SqlBuilder {
 
 	@Override
 	public void delete(Venda e) throws Exception {
-		// TODO Auto-generated method stub
+		con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		new ItemDaoImpl().deleteAll(e.getItens());		
+		String sql = "delete from venda where cod_venda = ?".toUpperCase();
 		
+		try{
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, e.getCodigo());
+			
+			System.out.println(stmt.toString());			
+			stmt.execute();
+			
+			
+		}catch(SQLException e1){
+			throw new DataAccessException(e1.getMessage());
+		}finally{
+			con.close();
+		}		
 	}
 
 	@Override

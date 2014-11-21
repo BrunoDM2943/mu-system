@@ -3,6 +3,7 @@ package view.instrumentos;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,9 +15,9 @@ import javax.swing.JTextField;
 
 import model.Fabricante;
 import model.Instrumento;
+import controller.FabricanteController;
 import controller.InstrumentoController;
 import enums.Especialidade;
-import controller.FabricanteController;
 
 public class CadastraInstrumentoView extends JInternalFrame implements ActionListener{
 
@@ -42,11 +43,16 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 	private JButton btnGravar;
 	private JButton btnCancelar;
 	
+	
 	public CadastraInstrumentoView() {		
-		 inicializar();
-		 setActions();
-		 setLayout();
-		 setFrame();
+		try {
+			inicializar();		
+			setActions();
+			setLayout();
+			setFrame();
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
 	}
 	
 	/**
@@ -68,8 +74,9 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 	/**
 	 * Inicializa os componentes da tela
 	 * @author Guilherme
+	 * @throws Exception 
 	 */
-	private void inicializar(){
+	private void inicializar() throws Exception{
 		lbFabricante 		= new JLabel("Fabricante:");
 		lbNomeIns  			= new JLabel("Nome:");
 		lbTipoIns	    	= new JLabel("Tipo:");
@@ -83,8 +90,11 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 				
 				
 		cbTipo = new JComboBox<Especialidade>(Especialidade.values());
-				
-		cbFabricante = new JComboBox<Fabricante>();
+		
+		Vector<Fabricante> fabricantes;
+		fabricantes = getVetorFabricantes();		
+		cbFabricante = new JComboBox<Fabricante>(fabricantes);
+		
 		
 		
 		btnGravar   = new JButton("Gravar");
@@ -95,7 +105,17 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 		painel = new JPanel(grade);
 	}
 	
-	
+	/**
+	 * Transforma a lista de fabricantes em um vetor
+	 * @return
+	 * @throws Exception 
+	 */
+	private Vector<Fabricante> getVetorFabricantes() throws Exception {
+		Vector<Fabricante> fabricantes = new Vector<Fabricante>();
+		new FabricanteController().listarTodos().forEach(e -> fabricantes.add(e));
+		return fabricantes;
+	}
+
 	/**
 	 * Adiciona os actions listeners aos botões
 	 * @author Guilherme

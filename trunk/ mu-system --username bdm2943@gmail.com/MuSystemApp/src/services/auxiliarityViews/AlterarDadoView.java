@@ -13,7 +13,6 @@ public abstract class AlterarDadoView{
 	public static Object alterarDado(Class<?> clazz, String campo) throws ClassCastException{
 		String msg = "Digite um novo valor para o campo " + campo + ":";		
 		novoCampo = JOptionPane.showInputDialog(null, msg);
-		
 		if(clazz.equals(String.class))
 			return (String) novoCampo;
 		if(clazz.equals(Integer.class))
