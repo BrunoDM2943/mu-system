@@ -1,8 +1,10 @@
 package controller;
 
 import java.util.List;
+import java.util.Vector;
 
 import model.Item;
+import model.Comercializavel;
 import dao.DaoFacade;
 
 public class ItemController {
@@ -32,5 +34,11 @@ public class ItemController {
 	public void atualizarItem(Item item) throws Exception {
 		DaoFacade.update(item);		
 	}
+	
+	public Vector<Comercializavel> listarItens(Class<? extends Comercializavel> clazz) throws Exception{
+	 	Vector<Comercializavel> vector = new Vector<Comercializavel>();
+	 	DaoFacade.lerTodos(clazz).forEach(e -> vector.add((Comercializavel) e));
+	 	return vector;
+	 }
 
 }
