@@ -7,5 +7,7 @@ import model.Item;
 public interface ItemDao{
 	
 	void save(List<Item> itens) throws Exception;
+
+	List<Item> listAll(int id) throws Exception; 
 	
 }

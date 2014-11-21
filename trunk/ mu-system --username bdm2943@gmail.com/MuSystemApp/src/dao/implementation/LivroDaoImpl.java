@@ -219,5 +219,30 @@ public class LivroDaoImpl implements LivroDao, SqlBuilder{
 		sql.append("where cod_livro = ?");
 		return sql.toString().toUpperCase();
 	}
+
+	@Override
+	public Livro getById(int cod) throws Exception {
+		Livro livro  = null;
+		ResultSet rs = null;		
+		String sql = "select * from Livro where cod_livro = ?".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setInt(1, cod);
+		stmt.execute();	
+		rs = stmt.getResultSet();
+		
+		while(rs.next()){
+			livro = new Livro();
+			livro.setCodigo((rs.getInt("cod_livro")));
+		    livro.setTitulo(rs.getString("titulo_livro"));
+		    livro.setAutor(rs.getString("autor_livro"));
+		    livro.setEditora(rs.getString("editora_livro"));
+		    livro.setPreco(rs.getFloat("preco_livro"));
+		    livro.setAno(rs.getInt("ano_livro"));		          
+		}
+		return livro;
+	}
 	
 }

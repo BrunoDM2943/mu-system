@@ -213,7 +213,7 @@ private Connection con;
 	 * @author bruno
 	 */
 	@Override
-	public Fabricante getFabricanteById(int id) throws Exception {
+	public Fabricante getById(int id) throws Exception {
 		Fabricante fabricante = null;
 		ResultSet result      = null;
 		String sql = "select * from fabricante where cod_fabricante = ? ".toUpperCase();
@@ -237,5 +237,6 @@ private Connection con;
 				
 		return fabricante;
 	}
+	
 	
 }

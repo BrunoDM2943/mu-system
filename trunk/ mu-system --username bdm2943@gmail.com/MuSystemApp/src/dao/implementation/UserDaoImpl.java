@@ -162,4 +162,10 @@ public class UserDaoImpl implements UserDao, SqlBuilder{
 		return sql.toString().toUpperCase();
 	}
 
+	@Override
+	public User getById(int cod) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

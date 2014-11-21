@@ -75,13 +75,13 @@ public class FabricanteDaoImplTest{
 	@Test
 	public void TC07LerPorId() throws Exception{
 		dao.save(fabricanteCarregado);
-		Fabricante novo = dao.getFabricanteById(fabricanteCarregado.getCod());
+		Fabricante novo = dao.getById(fabricanteCarregado.getCod());
 		assertTrue(fabricanteCarregado.equals(novo));
 	}
 	
 	@Test
 	public void TC08LerPorIdVazio() throws Exception{
-		assertNull(dao.getFabricanteById(0));
+		assertNull(dao.getById(0));
 	}
 
 }

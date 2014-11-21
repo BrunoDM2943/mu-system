@@ -1,15 +1,17 @@
 package testCases;
 
-import model.Comercializavel;
-import model.Livro;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Item;
 
 
 public class TesteBasicos {
 
 	
 	public static void main(String[] args) {
-		Comercializavel a = new Livro();
-		System.out.println(a.getClass());
+		List<Item> lista = new ArrayList<Item>();
+		lista.add(null);
 	}
 	
 }

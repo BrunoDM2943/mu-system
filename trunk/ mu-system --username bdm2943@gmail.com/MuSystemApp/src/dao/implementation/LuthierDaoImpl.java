@@ -233,4 +233,33 @@ public class LuthierDaoImpl implements LuthierDao, SqlBuilder{
 		return sql.toString().toUpperCase();	
 	}
 
+	@Override
+	public Luthier getById(int cod) throws Exception {
+		Luthier luthier  = null;
+		String sql = "select * from luthier where cod_luthier = ?".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet    result = null;		
+		stmt.setInt(1, cod);
+		stmt.execute();	
+		result = stmt.getResultSet();
+		
+		while(result.next()){
+			luthier = new Luthier();
+			luthier.setCod(result.getInt(1));
+			luthier.setNome(result.getString(2));
+		    luthier.setCpf(result.getString(3));
+		    luthier.setEndereco(result.getString(4));
+		    luthier.setBairro(result.getString(5));
+		    luthier.setCidade(result.getString(6));
+		    luthier.setUf(result.getString(7));
+		    luthier.setTelefone(result.getString(8));
+		    luthier.setEmail(result.getString(9));
+		    luthier.setEspecialidade(result.getString(10));
+		    	                           
+		}
+		return luthier;
+	}
+
 }

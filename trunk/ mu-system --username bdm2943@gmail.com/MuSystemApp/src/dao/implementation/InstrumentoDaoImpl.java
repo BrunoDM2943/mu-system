@@ -167,7 +167,7 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 		while(result.next()){
 			instrumento = new Instrumento();			
 			instrumento.setCod(result.getInt("cod_instrumento"));
-			fabricante = instrumentoDao.getFabricanteById(result.getInt("cod_fabricante"));
+			fabricante = instrumentoDao.getById(result.getInt("cod_fabricante"));
 			instrumento.setFabricante(fabricante);
 		    instrumento.setNome(result.getString("nome_instrumento"));
 		    instrumento.setTipo(result.getString("tipo_instrumento"));
@@ -206,6 +206,34 @@ public class InstrumentoDaoImpl implements InstrumentoDao , SqlBuilder {
 		sql.append("especificacao = ?");
 		sql.append("where cod_instrumento = ?");
 		return sql.toString().toUpperCase();
+	}
+
+	public Instrumento getById(int cod_instumento) throws Exception {		
+		FabricanteDao instrumentoDao = new FabricanteDaoImpl();
+		ResultSet result 			 = null;	
+		Instrumento instrumento      = null;
+		Fabricante fabricante    	 = null;
+		
+		String sql = "select * from instrumento where cod_instrumento = ?".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setInt(1, cod_instumento);
+		stmt.execute();	
+		result = stmt.getResultSet();
+		
+		while(result.next()){
+			instrumento = new Instrumento();			
+			instrumento.setCod(result.getInt("cod_instrumento"));
+			fabricante = instrumentoDao.getById(result.getInt("cod_fabricante"));
+			instrumento.setFabricante(fabricante);
+		    instrumento.setNome(result.getString("nome_instrumento"));
+		    instrumento.setTipo(result.getString("tipo_instrumento"));
+		    instrumento.setPreco(result.getFloat("preco_instrumento"));
+		    instrumento.setEspecificacao(result.getString("especificacao"));	                           
+		}
+		return instrumento;
 	}	
 	
 }
