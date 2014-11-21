@@ -27,6 +27,7 @@ import view.livro.GerenciaLivroView;
 import view.luthier.CadastraLuthierView;
 import view.media.CadastraMediaView;
 import view.media.GerenciaMediaView;
+import view.venda.HistoricoVendaView;
 import view.luthier.GerenciaLuthierView;
 
 public class Menu extends JFrame implements ActionListener {
@@ -57,6 +58,9 @@ public class Menu extends JFrame implements ActionListener {
 	
 	private JMenu Itens;
 
+	private JMenu 	  menuVenda;
+	private JMenuItem historicoVenda;
+
 	private CadastraClienteView     cadastraClienteView;
 	private CadastraLuthierView     cadastraLuthierView;
 	private CadastraFabricanteView  cadastraFabricanteView;
@@ -73,6 +77,7 @@ public class Menu extends JFrame implements ActionListener {
 	private GerenciaMediaView       gerenciaMediaView;
 	private GerenciaInstrumentoView gerenciaInstrumentoView;
 	
+	private HistoricoVendaView      historicoVendaView;	
 	private CadastraItemView cadIt;
 
 	public Menu() {
@@ -99,6 +104,7 @@ public class Menu extends JFrame implements ActionListener {
 		gerenciaMedia.addActionListener(this);
 		gerenciaInstrumento.addActionListener(this);
 		
+		historicoVenda.addActionListener(this);
 		Itens.addActionListener(this);
 	}
 
@@ -132,14 +138,14 @@ public class Menu extends JFrame implements ActionListener {
 
 		menuBar = new JMenuBar();
 
-		menuRegistros      = new JMenu("Cadastros");
-		cadastraCliente    = new JMenuItem("Clientes");
-		cadastraLuthier    = new JMenuItem("Luthier");
-		cadastraFabricante = new JMenuItem("Fabricantes");
-		cadastraAcessorio  = new JMenuItem("Acessorios");
-		cadastraLivro      = new JMenuItem("Livros");
-		cadastraMidia      = new JMenuItem("Media");
-		cadastraInstrumento= new JMenuItem("Instrumento");
+		menuRegistros       = new JMenu("Cadastros");
+		cadastraCliente     = new JMenuItem("Clientes");
+		cadastraLuthier     = new JMenuItem("Luthier");
+		cadastraFabricante  = new JMenuItem("Fabricantes");
+		cadastraAcessorio   = new JMenuItem("Acessorios");
+		cadastraLivro       = new JMenuItem("Livros");
+		cadastraMidia       = new JMenuItem("Media");
+		cadastraInstrumento = new JMenuItem("Instrumento");
 
 		menuGerenciamento   = new JMenu("Gerenciamento");
 		gerenciaClientes    = new JMenuItem("Clientes");
@@ -149,6 +155,9 @@ public class Menu extends JFrame implements ActionListener {
 		gerenciaLivro       = new JMenuItem("Livros");
 		gerenciaMedia       = new JMenuItem("Media");
 		gerenciaInstrumento = new JMenuItem("Instrumento");
+		
+		menuVenda           = new JMenu("Venda");
+		historicoVenda      = new JMenuItem("Histórico de Vendas");
 		
 		Itens = new JMenu("Itens");
 	}
@@ -164,6 +173,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		menuBar.add(menuRegistros);
 		menuBar.add(menuGerenciamento);
+		menuBar.add(menuVenda);
 		menuBar.add(Itens);
 
 		menuRegistros.add(cadastraCliente);
@@ -181,6 +191,8 @@ public class Menu extends JFrame implements ActionListener {
 		menuGerenciamento.add(gerenciaLivro);
 		menuGerenciamento.add(gerenciaMedia);
 		menuGerenciamento.add(gerenciaInstrumento);
+		
+		menuVenda.add(historicoVenda);
 	}
 
 	@Override
@@ -259,6 +271,10 @@ public class Menu extends JFrame implements ActionListener {
 			gerenciaInstrumentoView = new GerenciaInstrumentoView();
 			desktop.add(gerenciaInstrumentoView);
 			gerenciaInstrumentoView.setVisible(true);
+		} else if (src.equals(historicoVenda)){
+			historicoVendaView = new HistoricoVendaView();
+			desktop.add(historicoVendaView);
+			historicoVendaView.setVisible(true);
 		}
 
 	}

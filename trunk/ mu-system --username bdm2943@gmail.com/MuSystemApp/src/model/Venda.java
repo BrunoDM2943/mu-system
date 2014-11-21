@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import services.validator.Validator;
 import dao.annotations.DataAccessClass;
+import exceptions.BusinessException;
 
 @DataAccessClass(daoImpl = "dao.implementation.VendaDaoImpl")
 public class Venda {
@@ -32,7 +34,9 @@ public class Venda {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(int codigo) throws BusinessException{
+		if(Validator.isZero(codigo))
+			throw new BusinessException("O codigo da venda não pode ser nulo");
 		this.codigo = codigo;
 	}
 
@@ -57,6 +61,7 @@ public class Venda {
 	}
 	
 	public float somar(){
+		total = 0;
 		itens.forEach(e -> e.somar());
 		itens.forEach(e -> total += e.getTotalItem());
 		return total;		
@@ -68,5 +73,11 @@ public class Venda {
 
 	public void setDataVenda(Date dataVenda) {
 		this.dataVenda = dataVenda;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {	
+		Venda v = (Venda)obj;
+		return v.getCodigo() == this.codigo;
 	}
 }

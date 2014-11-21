@@ -1,6 +1,6 @@
 package testCases.sprint1;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -16,7 +16,6 @@ import model.Media;
 import model.Venda;
 
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -110,13 +109,13 @@ public class VendaDaoImplTest {
 	
 	@AfterClass
 	public static void tearDown() throws Exception{
-		DaoFacade.delete(venda);
-		DaoFacade.delete(cli);
-		DaoFacade.delete(livro);
-		DaoFacade.delete(media);
-		DaoFacade.delete(acessorio);
-		DaoFacade.delete(instrumento);		
-		DaoFacade.delete(fabricante);
+//		DaoFacade.delete(venda);
+//		DaoFacade.delete(cli);
+//		DaoFacade.delete(livro);
+//		DaoFacade.delete(media);
+//		DaoFacade.delete(acessorio);
+//		DaoFacade.delete(instrumento);		
+//		DaoFacade.delete(fabricante);
 	}
 	
 	@Test
@@ -130,5 +129,14 @@ public class VendaDaoImplTest {
 		float somaVenda = venda.somar();
 		assertTrue(somaTotal == somaVenda);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void CT03ListAll() throws Exception{
+		List<Venda> lista = (List<Venda>) DaoFacade.lerTodos(Venda.class);
+		assertTrue(lista.contains(venda));
+		
+	}
+	
 
 }

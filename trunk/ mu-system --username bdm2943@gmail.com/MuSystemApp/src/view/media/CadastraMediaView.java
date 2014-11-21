@@ -159,7 +159,6 @@ public class CadastraMediaView extends JInternalFrame implements ActionListener{
 			this.dispose();
 		}else{
 			Media media = new Media();
-			
 			try{
 				media.setTitulo(tfTitulo.getText());
 				media.setAutor(tfAutor.getText());
@@ -174,5 +173,7 @@ public class CadastraMediaView extends JInternalFrame implements ActionListener{
 			}
 		}
 	}
+	
+	
 
 }
