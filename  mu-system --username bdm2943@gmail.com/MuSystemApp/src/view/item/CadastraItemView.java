@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -14,8 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Comercializavel;
-import model.Item;
-import model.Livro;
 import controller.ItemController;
 import enums.TipoItem;
 
@@ -35,6 +34,7 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 	
 	private JComboBox<TipoItem> cbItem;
 	private JComboBox<Comercializavel> cbProduto;
+	private DefaultComboBoxModel<Comercializavel> cbModel;
 		
 	private JButton btnGravar;
 	private JButton btnCancelar;
@@ -137,7 +137,9 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 			try {
 				TipoItem enumItem = (TipoItem) cbItem.getSelectedItem();
 				vetorItens = itemController.listarItens(enumItem.getClazz());
-				cbProduto = new JComboBox<Comercializavel>(vetorItens);
+				vetorItens.forEach(item->System.out.println(item));
+				cbModel = new DefaultComboBoxModel<Comercializavel>(vetorItens);
+				cbProduto.setModel(cbModel);
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
