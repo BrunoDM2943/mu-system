@@ -99,11 +99,15 @@ public class ItemDaoImpl implements ItemDao{
 			codMidia       = rs.getInt("cod_midia");
 			codLivro	   = rs.getInt("cod_livro");
 			qtd 		   = rs.getInt("quantidade");
-						
-			itens.add(getItemByCod(codInstrumento, instruDao, qtd));
-			itens.add(getItemByCod(codAcessorio, acessoDao, qtd));
-			itens.add(getItemByCod(codMidia, mediaDao, qtd));
-			itens.add(getItemByCod(codLivro, livroDao, qtd));
+			
+			if(!Validator.isZero(codInstrumento))
+				itens.add(getItemByCod(codInstrumento, instruDao, qtd));
+			if(!Validator.isZero(codAcessorio))
+				itens.add(getItemByCod(codAcessorio, acessoDao, qtd));
+			if(!Validator.isZero(codMidia))
+				itens.add(getItemByCod(codMidia, mediaDao, qtd));
+			if(!Validator.isZero(codLivro))
+				itens.add(getItemByCod(codLivro, livroDao, qtd));
 			
 		}
 		
@@ -123,10 +127,7 @@ public class ItemDaoImpl implements ItemDao{
 	 * @author bruno
 	 */
 	@SuppressWarnings("rawtypes")
-	private Item getItemByCod(int codigo, DataAccessObject dao, int qtd) throws Exception{
-		if(Validator.isZero(codigo))
-			return null;
-		
+	private Item getItemByCod(int codigo, DataAccessObject dao, int qtd) throws Exception{			
 		Comercializavel comex = null;
 		
 		comex = (Comercializavel) dao.getById(codigo);

@@ -143,5 +143,6 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 			}
 
 		}
+		}
 	}
-}
+
