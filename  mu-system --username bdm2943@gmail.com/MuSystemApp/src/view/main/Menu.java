@@ -21,6 +21,7 @@ import view.fabricantes.CadastraFabricanteView;
 import view.fabricantes.GerenciaFabricanteView;
 import view.instrumentos.CadastraInstrumentoView;
 import view.instrumentos.GerenciaInstrumentoView;
+import view.item.CadastraItemView;
 import view.livro.CadastraLivroView;
 import view.livro.GerenciaLivroView;
 import view.luthier.CadastraLuthierView;
@@ -53,6 +54,8 @@ public class Menu extends JFrame implements ActionListener {
 	private JMenuItem gerenciaLivro;
 	private JMenuItem gerenciaMedia;
 	private JMenuItem gerenciaInstrumento;
+	
+	private JMenu Itens;
 
 	private CadastraClienteView     cadastraClienteView;
 	private CadastraLuthierView     cadastraLuthierView;
@@ -69,6 +72,8 @@ public class Menu extends JFrame implements ActionListener {
 	private GerenciaLivroView       gerenciaLivroView;
 	private GerenciaMediaView       gerenciaMediaView;
 	private GerenciaInstrumentoView gerenciaInstrumentoView;
+	
+	private CadastraItemView cadIt;
 
 	public Menu() {
 		inicializar();
@@ -93,6 +98,8 @@ public class Menu extends JFrame implements ActionListener {
 		gerenciaLivro.addActionListener(this);
 		gerenciaMedia.addActionListener(this);
 		gerenciaInstrumento.addActionListener(this);
+		
+		Itens.addActionListener(this);
 	}
 
 	/**
@@ -142,6 +149,8 @@ public class Menu extends JFrame implements ActionListener {
 		gerenciaLivro       = new JMenuItem("Livros");
 		gerenciaMedia       = new JMenuItem("Media");
 		gerenciaInstrumento = new JMenuItem("Instrumento");
+		
+		Itens = new JMenu("Itens");
 	}
 
 	/**
@@ -155,6 +164,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		menuBar.add(menuRegistros);
 		menuBar.add(menuGerenciamento);
+		menuBar.add(Itens);
 
 		menuRegistros.add(cadastraCliente);
 		menuRegistros.add(cadastraLuthier);
@@ -175,12 +185,15 @@ public class Menu extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object src = e.getSource();
+		cadIt = new CadastraItemView();
+		desktop.add(cadIt);
+		cadIt.setVisible(true);
+		/**Object src = e.getSource();
 		try {
 			makesInternalFrame(src);
 		} catch (PropertyVetoException e1) {
 			e1.printStackTrace();
-		}
+		}**/
 	}
 
 	/**

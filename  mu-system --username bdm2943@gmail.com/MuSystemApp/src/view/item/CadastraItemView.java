@@ -3,6 +3,7 @@ package view.item;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,7 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Comercializavel;
 import model.Item;
+import model.Livro;
 import controller.ItemController;
 import enums.TipoItem;
 
@@ -31,11 +34,13 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 	private JTextField tfQuant;
 	
 	private JComboBox<TipoItem> cbItem;
-	private JComboBox cbProduto;
+	private JComboBox<Comercializavel> cbProduto;
 		
 	private JButton btnGravar;
 	private JButton btnCancelar;
 	
+	private ItemController itemController;
+	private Vector<Comercializavel> vetorItens;
 	
 	public CadastraItemView(){		
 		 inicializar();
@@ -51,7 +56,7 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 	private void setFrame() {
 		 this.setTitle("Cadastro de acess��rios");
 		 this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		 this.setSize(400,100);
+		 this.setSize(400,200);
 		 this.setVisible(true);		 
 		 this.setClosable(true);
 		 this.setMaximizable(true);
@@ -66,14 +71,19 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 	 */
 	private void inicializar(){		
 		
+		itemController = new ItemController();
+		vetorItens     = new Vector<Comercializavel>();
+		
 		lbProduto     = new JLabel("Produto: ");
 		lbItem        = new JLabel("Item: ");
 		lbQuant       = new JLabel("Quantidade: ");
 			
+		cbItem     = new JComboBox<TipoItem>(TipoItem.values());
+		cbProduto  = new JComboBox<Comercializavel>();
 		tfQuant    = new JTextField(3);
 				
 		lbProduto.setLabelFor(cbProduto);
-		lbItem.setLabelFor(cbProduto);
+		lbItem.setLabelFor(cbItem);
 		lbQuant.setLabelFor(tfQuant);
 		btnGravar   = new JButton("Gravar");
 		btnCancelar = new JButton("Cancelar");
@@ -90,6 +100,7 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 	private void setActions(){
 		btnGravar.addActionListener(this);
 		btnCancelar.addActionListener(this);
+		cbItem.addActionListener(this);
 	}
 	
 	
@@ -99,11 +110,12 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 	 * @author joão
 	 */
 	private void setLayout(){
-		painel.add(lbProduto);
-		painel.add(cbProduto);
 		
 		painel.add(lbItem);
 		painel.add(cbItem);
+		
+		painel.add(lbProduto);
+		painel.add(cbProduto);
 		
 		painel.add(lbQuant);
 		painel.add(tfQuant);
@@ -114,24 +126,22 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 		this.add(painel);
 	}
 	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
-		
-		if(src.equals(btnCancelar)){
+
+		if (src.equals(btnCancelar)) {
 			this.dispose();
-		}else{
-			Acessorio acessorio = new Acessorio();
+		} else if (src.equals(cbItem)) {
 			try {
-				acessorio.setNome(tfNome.getText());
-				acessorio.setPreco(Float.parseFloat(tfQuant.getText()));				
-				
-				new AcessorioController().gravarAcessorio(acessorio);	
-				JOptionPane.showMessageDialog(painel, "Acessorio gravado com sucesso!");
+				TipoItem enumItem = (TipoItem) cbItem.getSelectedItem();
+				vetorItens = itemController.listarItens(enumItem.getClazz());
+				cbProduto = new JComboBox<Comercializavel>(vetorItens);
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(painel, e1.getMessage());
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
+
 		}
 	}
-
 }
