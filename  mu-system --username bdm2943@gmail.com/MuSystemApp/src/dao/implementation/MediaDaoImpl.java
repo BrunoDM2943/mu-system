@@ -222,5 +222,29 @@ public class MediaDaoImpl implements MediaDao, SqlBuilder{
 		sql.append("where cod_midia = ?");
 		return sql.toString().toUpperCase();
 	}
+
+	@Override
+	public Media getById(int cod) throws Exception {
+		Media media  = null;
+		String sql = "select * from Midia".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet    result = null;		
+		stmt.execute();	
+		result = stmt.getResultSet();
+		
+		while(result.next()){
+			media = new Media();
+			media.setCodigo((result.getInt("cod_midia")));
+		    media.setTitulo(result.getString("titulo_midia"));
+		    media.setAutor(result.getString("autor_midia"));
+		    media.setDistribuidora(result.getString("dist_midia"));
+		    media.setTipo(result.getString("tipo_midia"));
+		    media.setPreco(result.getFloat("preco_midia"));
+		    media.setAno(result.getInt("ano_midia"));		             
+		}
+		return media;
+	}
 	
 }

@@ -196,5 +196,31 @@ public class AcessorioDaoImpl implements AcessorioDao, SqlBuilder{
 		sql.append("where cod_acessorio = ?");
 		return sql.toString().toUpperCase();
 	}
+
+	/**
+	 * Retornar um acessorio através do seu id
+	 * 
+	 * @author bruno
+	 */
+	@Override
+	public Acessorio getById(int cod) throws Exception {
+		Acessorio acessorio  = null;
+		String sql = "select * from Acessorio where cod_acessorio = ?".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet    result = null;		
+		stmt.setInt(1, cod);
+		stmt.execute();	
+		result = stmt.getResultSet();
+		
+		while(result.next()){
+			acessorio = new Acessorio();
+			acessorio.setCodigo(result.getInt(1));
+			acessorio.setNome(result.getString(2));
+			acessorio.setPreco(result.getFloat(3));		                           
+		}
+		return acessorio;
+	}
 	
 }

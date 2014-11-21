@@ -49,5 +49,13 @@ public interface DataAccessObject<T>{
 	 * @throws Exception
 	 */
 	List<T> listAll() throws Exception;
+	
+	/**
+	 * Retorna um objeto persistido
+	 * através do seu ID
+	 * @param cod
+	 * @return Objeto
+	 */
+	T getById(int cod) throws Exception;
 
 }

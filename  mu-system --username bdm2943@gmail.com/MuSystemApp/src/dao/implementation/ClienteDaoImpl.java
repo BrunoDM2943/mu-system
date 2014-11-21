@@ -227,5 +227,33 @@ public class ClienteDaoImpl implements ClienteDao, SqlBuilder{
 		sql.append("where cod_cliente = ?");
 		return sql.toString().toUpperCase();
 	}
+
+	@Override
+	public Cliente getById(int cod) throws Exception {
+		Cliente cliente = null;
+		ResultSet rs    = null;		
+		String sql = "select * from cliente where cod_cliente = ?".toUpperCase();
+		
+		con = ConnectionFactory.getConnection();		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setInt(1, cod);
+		stmt.execute();	
+		rs = stmt.getResultSet();
+		
+		while(rs.next()){
+			cliente = new Cliente();
+			cliente.setNome(rs.getString(1));
+		    cliente.setRg(rs.getString(2));
+		    cliente.setEndereco(rs.getString(3));
+		    cliente.setBairro(rs.getString(4));
+		    cliente.setCidade(rs.getString(5));
+		    cliente.setUf(rs.getString(6));
+		    cliente.setTelefone(rs.getString(7));
+		    cliente.setEmail(rs.getString(8));
+		    cliente.setCod(rs.getInt(9));	                           
+		}
+		return cliente;
+	}
 	
 }
