@@ -1,28 +1,24 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import model.Item;
 import model.Comercializavel;
+import model.Item;
+import view.GUIModels.tableModels.ItemTableModel;
 import dao.DaoFacade;
 
 public class ItemController {
 	
-	private List<Item> listaItem;
-	
+	private static List<Item> listaItem = new ArrayList<Item>();
+		
 	public void gravarItem(Item item) throws Exception{
 		DaoFacade.save(item);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Item> listarTodos() throws Exception {
-		if(listaItem != null)
-			return listaItem;
-		listaItem = (List<Item>) DaoFacade.lerTodos(Item.class);
-		if(listaItem.isEmpty())
-			throw new Exception("Não há items cadastrados na base!");
-		
+	public List<Item> listarTodos() throws Exception {	
+		listaItem.forEach(e -> e.somar());
 		return listaItem;
 	}
 
@@ -40,5 +36,15 @@ public class ItemController {
 	 	DaoFacade.lerTodos(clazz).forEach(e -> vector.add((Comercializavel) e));
 	 	return vector;
 	 }
+	
+	public ItemTableModel removeItem(Item item){
+		listaItem.remove(item);
+		return new ItemTableModel(listaItem);
+	}
+	
+	public ItemTableModel addItem(Item item){
+		listaItem.add(item);
+		return new ItemTableModel(listaItem);
+	}
 
 }

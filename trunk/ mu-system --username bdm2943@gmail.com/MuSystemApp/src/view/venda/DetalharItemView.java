@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,14 +26,15 @@ public class DetalharItemView extends JFrame implements ActionListener{
 	private Venda venda = null;
 	
 	private JPanel painel;
-	private JPanel painelBotoes;
+	private JPanel painelRodape;
 	private JScrollPane painelScroll;
 	
 	private JTable tblItem;	
 	private ItemTableModel itemModel;
-
 	
 	private JButton btnCancelar;
+	
+	private JLabel lbSoma;
 	
 	
 	public DetalharItemView(Venda venda){
@@ -57,7 +59,7 @@ public class DetalharItemView extends JFrame implements ActionListener{
 	private void setFrame() {
 		 this.setTitle("Historico de Vendas");
 		 this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		 this.setSize(480,360);
+		 this.setSize(480,200);
 		 this.setVisible(true);		 
 		 this.setResizable(true);		 
 	}
@@ -71,10 +73,13 @@ public class DetalharItemView extends JFrame implements ActionListener{
 		carregarTabela();
 		
 		btnCancelar  = new JButton("Cancelar");	
+		lbSoma = new JLabel("Total = R$" + venda.somar());
 		
 		painel = new JPanel(new BorderLayout(10, 10));
 		painelScroll = new JScrollPane(tblItem);
-		painelBotoes = new JPanel(new FlowLayout(FlowLayout.LEFT, 5,5));
+		painelRodape = new JPanel(new FlowLayout(FlowLayout.LEFT, 5,5));
+		
+		
 	}
 	
 	/**
@@ -109,10 +114,11 @@ public class DetalharItemView extends JFrame implements ActionListener{
 	 * @author bruno
 	 */
 	private void setLayout(){
-		painelBotoes.add(btnCancelar);
+		painelRodape.add(btnCancelar);
+		painelRodape.add(lbSoma);
 
 		painel.add(painelScroll, BorderLayout.CENTER);
-		painel.add(painelBotoes, BorderLayout.SOUTH);
+		painel.add(painelRodape, BorderLayout.SOUTH);
 		
 		this.add(painel);
 	}

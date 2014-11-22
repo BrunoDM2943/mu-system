@@ -25,10 +25,11 @@ import view.item.CadastraItemView;
 import view.livro.CadastraLivroView;
 import view.livro.GerenciaLivroView;
 import view.luthier.CadastraLuthierView;
+import view.luthier.GerenciaLuthierView;
 import view.media.CadastraMediaView;
 import view.media.GerenciaMediaView;
 import view.venda.HistoricoVendaView;
-import view.luthier.GerenciaLuthierView;
+import view.venda.RealizarVendaView;
 
 public class Menu extends JFrame implements ActionListener {
 
@@ -60,6 +61,7 @@ public class Menu extends JFrame implements ActionListener {
 
 	private JMenu 	  menuVenda;
 	private JMenuItem historicoVenda;
+	private JMenuItem realizarVenda;
 
 	private CadastraClienteView     cadastraClienteView;
 	private CadastraLuthierView     cadastraLuthierView;
@@ -79,6 +81,7 @@ public class Menu extends JFrame implements ActionListener {
 	
 	private HistoricoVendaView      historicoVendaView;	
 	private CadastraItemView cadIt;
+	private RealizarVendaView realizarVendaView;
 
 	public Menu() {
 		inicializar();
@@ -106,6 +109,7 @@ public class Menu extends JFrame implements ActionListener {
 		
 		historicoVenda.addActionListener(this);
 		Itens.addActionListener(this);
+		realizarVenda.addActionListener(this);
 	}
 
 	/**
@@ -158,6 +162,7 @@ public class Menu extends JFrame implements ActionListener {
 		
 		menuVenda           = new JMenu("Venda");
 		historicoVenda      = new JMenuItem("Histórico de Vendas");
+		realizarVenda       = new JMenuItem("Realizar Venda");
 		
 		Itens = new JMenu("Itens");
 	}
@@ -192,14 +197,15 @@ public class Menu extends JFrame implements ActionListener {
 		menuGerenciamento.add(gerenciaMedia);
 		menuGerenciamento.add(gerenciaInstrumento);
 		
+		menuVenda.add(realizarVenda);
 		menuVenda.add(historicoVenda);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/**cadIt = new CadastraItemView();
-		desktop.add(cadIt);
-		cadIt.setVisible(true);**/
+//		cadIt = new CadastraItemView();
+//		desktop.add(cadIt);
+//		cadIt.setVisible(true);
 		Object src = e.getSource();
 		try {
 			makesInternalFrame(src);
@@ -271,6 +277,10 @@ public class Menu extends JFrame implements ActionListener {
 			gerenciaInstrumentoView = new GerenciaInstrumentoView();
 			desktop.add(gerenciaInstrumentoView);
 			gerenciaInstrumentoView.setVisible(true);
+		} else if (src.equals(realizarVenda)){
+			realizarVendaView = new RealizarVendaView();
+			desktop.add(realizarVendaView);
+			realizarVendaView.setVisible(true);
 		} else if (src.equals(historicoVenda)){
 			historicoVendaView = new HistoricoVendaView();
 			desktop.add(historicoVendaView);

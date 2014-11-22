@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Vector;
 
 import model.Cliente;
 import dao.DaoFacade;
@@ -33,4 +34,10 @@ public class ClienteController {
 		DaoFacade.update(cli);		
 	}
 
+	public Vector<Cliente> getVetorCliente() throws Exception{
+		Vector<Cliente> vet = new Vector<Cliente>();
+		DaoFacade.lerTodos(Cliente.class).forEach(e -> vet.add((Cliente) e));
+		return vet;
+	}
+	
 }
