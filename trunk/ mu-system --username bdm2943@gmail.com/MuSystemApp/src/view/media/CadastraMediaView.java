@@ -9,17 +9,15 @@ import java.util.stream.IntStream;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 
+import model.Media;
 import services.validator.OnlyNumberField;
 import services.validator.TextValidator;
-import model.Media;
 import controller.MediaController;
 import enums.TiposMidia;
 

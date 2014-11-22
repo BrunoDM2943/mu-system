@@ -21,7 +21,6 @@ import view.fabricantes.CadastraFabricanteView;
 import view.fabricantes.GerenciaFabricanteView;
 import view.instrumentos.CadastraInstrumentoView;
 import view.instrumentos.GerenciaInstrumentoView;
-import view.item.CadastraItemView;
 import view.livro.CadastraLivroView;
 import view.livro.GerenciaLivroView;
 import view.luthier.CadastraLuthierView;
@@ -80,7 +79,6 @@ public class Menu extends JFrame implements ActionListener {
 	private GerenciaInstrumentoView gerenciaInstrumentoView;
 	
 	private HistoricoVendaView      historicoVendaView;	
-	private CadastraItemView cadIt;
 	private RealizarVendaView realizarVendaView;
 
 	public Menu() {
