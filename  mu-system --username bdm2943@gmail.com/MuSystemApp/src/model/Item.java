@@ -60,5 +60,12 @@ public class Item {
 	public String toString() {
 		return this.comercilizavel.toString();
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Item item = (Item) obj;		
+		return this.comercilizavel.equals(item.comercilizavel);
+	}
 
 }
+ 

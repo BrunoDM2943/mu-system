@@ -1,5 +1,7 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +50,9 @@ public class Venda {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(Cliente cliente) throws BusinessException{
+		if(cliente == null)	
+			throw new BusinessException("Uma venda precisa ser registrada à um cliente!");		
 		this.cliente = cliente;
 	}
 
@@ -71,8 +75,17 @@ public class Venda {
 		return dataVenda;
 	}
 
-	public void setDataVenda(Date dataVenda) {
+	public void setDataVenda(Date dataVenda) throws BusinessException{
+		if(dataVenda == null)
+			throw new BusinessException("A data de uma venda não pode ser vazia!");
 		this.dataVenda = dataVenda;
+	}
+	
+	public void setDataVenda(String dataVenda) throws ParseException, BusinessException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(Validator.isEmpty(dataVenda))
+			throw new BusinessException("A data de uma venda não pode ser vazia!");
+		this.dataVenda = sdf.parse(dataVenda);
 	}
 	
 	@Override

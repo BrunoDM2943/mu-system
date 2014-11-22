@@ -8,7 +8,7 @@ import dao.DaoFacade;
 public class VendaController {
 	
 	private List<Venda> listaVenda;
-	
+			
 	public void gravarVenda(Venda venda) throws Exception{
 		DaoFacade.save(venda);
 	}
@@ -32,5 +32,6 @@ public class VendaController {
 	public void atualizarVenda(Venda venda) throws Exception {
 		DaoFacade.update(venda);		
 	}
+	
 
 }
