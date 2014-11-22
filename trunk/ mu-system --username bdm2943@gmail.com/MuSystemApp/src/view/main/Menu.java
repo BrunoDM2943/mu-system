@@ -197,15 +197,15 @@ public class Menu extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		cadIt = new CadastraItemView();
+		/**cadIt = new CadastraItemView();
 		desktop.add(cadIt);
-		cadIt.setVisible(true);
-		/**Object src = e.getSource();
+		cadIt.setVisible(true);**/
+		Object src = e.getSource();
 		try {
 			makesInternalFrame(src);
 		} catch (PropertyVetoException e1) {
 			e1.printStackTrace();
-		}**/
+		}
 	}
 
 	/**

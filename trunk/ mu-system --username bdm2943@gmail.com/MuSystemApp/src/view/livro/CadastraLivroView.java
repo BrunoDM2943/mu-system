@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import model.Livro;
 import controller.LivroController;
+import services.validator.OnlyNumberField;
 
 public class CadastraLivroView extends JInternalFrame implements ActionListener{
 	
@@ -80,6 +81,7 @@ public class CadastraLivroView extends JInternalFrame implements ActionListener{
 		tfAutor         = new JTextField(30);
 		tfDistribuidora = new JTextField(30);
 		tfPreco 		= new JTextField(6);
+		tfPreco.setDocument(new OnlyNumberField(6));
 		
 		Arrays.asList(IntStream.range(1900, 2099)).forEach(e -> System.out.println(e));;
 		Vector<Integer> anos = getVectorAnos();

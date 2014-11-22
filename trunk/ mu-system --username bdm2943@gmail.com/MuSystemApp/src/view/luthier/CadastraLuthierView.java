@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import services.validator.OnlyNumberField;
 import model.Luthier;
 import controller.LuthierController;
 import enums.Especialidade;

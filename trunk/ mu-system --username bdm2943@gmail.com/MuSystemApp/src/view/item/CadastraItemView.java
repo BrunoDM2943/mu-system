@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import services.validator.OnlyNumberField;
 import model.Comercializavel;
 import controller.ItemController;
 import enums.TipoItem;
@@ -81,6 +82,7 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 		cbItem     = new JComboBox<TipoItem>(TipoItem.values());
 		cbProduto  = new JComboBox<Comercializavel>();
 		tfQuant    = new JTextField(3);
+		tfQuant.setDocument(new OnlyNumberField(3));
 				
 		lbProduto.setLabelFor(cbProduto);
 		lbItem.setLabelFor(cbItem);
