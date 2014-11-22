@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import services.validator.OnlyNumberField;
 import model.Fabricante;
 import model.Instrumento;
 import controller.FabricanteController;
@@ -86,6 +87,7 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 			
 		tfNomeIns       = new JTextField(30);
 		tfPreco         = new JTextField(6);
+		tfPreco.setDocument(new OnlyNumberField());
 		tfEspecificacao = new JTextField(30);
 				
 				

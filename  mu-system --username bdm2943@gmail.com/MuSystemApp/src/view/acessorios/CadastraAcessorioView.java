@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import services.validator.OnlyNumberField;
 import model.Acessorio;
 import controller.AcessorioController;
 
@@ -66,6 +67,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 			
 		tfNome     = new JTextField(30);
 		tfPreco    = new JTextField(20);
+		tfPreco.setDocument(new OnlyNumberField(6));
 				
 		lbNome.setLabelFor(tfPreco);
 		lbPreco.setLabelFor(tfPreco);
