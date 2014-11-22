@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import services.validator.TextValidator;
 import model.Cliente;
 import controller.ClienteController;
 import enums.Estado;
@@ -107,6 +108,9 @@ public class CadastraClienteView extends JInternalFrame implements ActionListene
 		tfTelefone = new JFormattedTextField(maskTelefone);
 		tfEmail    = new JTextField(20);
 		
+		tfNome.setDocument(new TextValidator("1234567890"));
+		tfBairro.setDocument(new TextValidator("1234567890"));
+		tfCidade.setDocument(new TextValidator("1234567890"));
 		
 		cbEstado = new JComboBox<Estado>(Estado.values());
 		

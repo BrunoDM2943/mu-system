@@ -82,6 +82,7 @@ public class CadastraItemView extends JInternalFrame implements ActionListener {
 		cbItem     = new JComboBox<TipoItem>(TipoItem.values());
 		cbProduto  = new JComboBox<Comercializavel>();
 		tfQuant    = new JTextField(3);
+		
 		tfQuant.setDocument(new OnlyNumberField(3));
 				
 		lbProduto.setLabelFor(cbProduto);

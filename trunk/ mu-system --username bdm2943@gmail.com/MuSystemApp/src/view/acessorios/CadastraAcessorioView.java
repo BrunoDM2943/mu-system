@@ -67,6 +67,7 @@ public class CadastraAcessorioView extends JInternalFrame implements ActionListe
 			
 		tfNome     = new JTextField(30);
 		tfPreco    = new JTextField(20);
+		
 		tfPreco.setDocument(new OnlyNumberField(6));
 				
 		lbNome.setLabelFor(tfPreco);
