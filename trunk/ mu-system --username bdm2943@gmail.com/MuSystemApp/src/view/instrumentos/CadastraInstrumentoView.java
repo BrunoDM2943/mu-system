@@ -168,6 +168,7 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 			
 			try{
 				ins.setNome(tfNomeIns.getText());
+				ins.setFabricante((Fabricante) cbFabricante.getSelectedItem()); 
 				ins.setTipo(cbTipo.getSelectedItem().toString());
 				ins.setPreco(Float.parseFloat(tfPreco.getText()));
 				ins.setEspecificacao(tfEspecificacao.getText());

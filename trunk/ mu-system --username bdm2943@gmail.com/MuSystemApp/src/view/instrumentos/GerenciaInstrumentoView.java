@@ -23,6 +23,7 @@ import services.auxiliarityViews.GerenciamentoServices;
 import services.validator.Validator;
 import view.GUIModels.tableModels.InstrumentoTableModel;
 import controller.InstrumentoController;
+import exceptions.BusinessException;
 
 public class GerenciaInstrumentoView extends JInternalFrame implements ActionListener, GerenciamentoServices<Instrumento>{
 
@@ -200,7 +201,9 @@ public class GerenciaInstrumentoView extends JInternalFrame implements ActionLis
 		try{
 			validarIndice(idx);
 			
-			String nomeCampo = tblModel.getColumnName(col);			
+			String nomeCampo = tblModel.getColumnName(col);		
+			if (nomeCampo.equals("Fabricante"))
+				throw new BusinessException("Alteração de fabricante não é permitida!");
 			Class<?> clazz = tblModel.getColumnClass(col);
 			Object e = AlterarDadoView.alterarDado(clazz, nomeCampo);
 			
@@ -212,6 +215,8 @@ public class GerenciaInstrumentoView extends JInternalFrame implements ActionLis
 				JOptionPane.showMessageDialog(this, "Media atualizado com sucesso");
 				carregarTableModel();
 				popularTabela();
+			} else {
+				JOptionPane.showMessageDialog(null, "Alteração de fabricante não é permitida!");
 			}
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(this, e.getMessage());

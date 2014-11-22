@@ -43,12 +43,14 @@ public class InstrumentoTableModel extends AbstractTableModel{
 		
 		switch(columnIndex){
 		case 0:
+			return ins.getFabricante().toString();
+		case 1:
 			return ins.getNome();
-		case 1:			
+		case 2:			
 			return ins.getTipo();
-		case 2:
-			return ins.getPreco();
 		case 3:
+			return ins.getPreco();
+		case 4:
 			return ins.getEspecificacao();
 		default:
 			return null;
@@ -68,13 +70,11 @@ public class InstrumentoTableModel extends AbstractTableModel{
 		case 1:			
 			return String.class;
 		case 2:
-			return String.class;
-		case 3:    
 			return TiposMidia.class;
-		case 4:    
+		case 3:    
 			return Float.class;
-		case 5:    
-			return Integer.class;
+		case 4:    
+			return String.class;
 		default:
 			return null;
 		}
@@ -91,16 +91,16 @@ public class InstrumentoTableModel extends AbstractTableModel{
 		
 		try {
 			switch(columnIndex){
-			case 0:
+			case 1:
 				ins.setNome(String.valueOf(aValue));
 				break;
-			case 1:			
+			case 2:			
 				ins.setTipo(String.valueOf(aValue));
 				break;
-			case 2:
+			case 3:
 				ins.setPreco((Float)(aValue));
 				break;
-			case 3:
+			case 4:
 				ins.setEspecificacao(String.valueOf(aValue));
 				break;			
 			}		
