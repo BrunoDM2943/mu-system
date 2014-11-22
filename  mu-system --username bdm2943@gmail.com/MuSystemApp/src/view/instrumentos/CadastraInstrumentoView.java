@@ -87,9 +87,9 @@ public class CadastraInstrumentoView extends JInternalFrame implements ActionLis
 			
 		tfNomeIns       = new JTextField(30);
 		tfPreco         = new JTextField(6);
-		tfPreco.setDocument(new OnlyNumberField());
 		tfEspecificacao = new JTextField(30);
 				
+		tfPreco.setDocument(new OnlyNumberField());
 				
 		cbTipo = new JComboBox<Especialidade>(Especialidade.values());
 		

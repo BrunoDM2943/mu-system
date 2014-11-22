@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import services.validator.OnlyNumberField;
+import services.validator.TextValidator;
 import model.Luthier;
 import controller.LuthierController;
 import enums.Especialidade;
@@ -113,6 +114,10 @@ public class CadastraLuthierView extends JInternalFrame implements ActionListene
 		tfCidade   = new JTextField(20);
 		tfTelefone = new JFormattedTextField(maskTelefone);
 		tfEmail    = new JTextField(20);
+		
+		tfNome.setDocument(new TextValidator("1234567890"));
+		tfBairro.setDocument(new TextValidator("1234567890"));
+		tfCidade.setDocument(new TextValidator("1234567890"));
 		
 		cbEstado       = new JComboBox<Estado>(Estado.values());
 		cbEspecialiade = new JComboBox<Especialidade>(Especialidade.values());

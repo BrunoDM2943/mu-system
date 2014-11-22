@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import services.validator.OnlyNumberField;
+import services.validator.TextValidator;
 import model.Media;
 import controller.MediaController;
 import enums.TiposMidia;
@@ -87,6 +88,8 @@ public class CadastraMediaView extends JInternalFrame implements ActionListener{
 		tfAutor         = new JTextField(30);
 		tfDistribuidora = new JTextField(30);
 		tfPreco 		= new JTextField(6);
+		
+		tfAutor.setDocument(new TextValidator("1234567890"));
 		tfPreco.setDocument(new OnlyNumberField(6));
 				
 		cbTipo = new JComboBox<TiposMidia>(TiposMidia.values());

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import services.validator.TextValidator;
 import model.Fabricante;
 import controller.FabricanteController;
 
@@ -83,6 +84,9 @@ public class CadastraFabricanteView extends JInternalFrame implements ActionList
 		tfNome     = new JTextField(30);
 		tfTelefone = new JFormattedTextField(maskTelefone);
 		tfContato  = new JTextField(30);
+		
+		tfNome.setDocument(new TextValidator("1234567890"));
+		tfContato.setDocument(new TextValidator("1234567890"));
 		
 		btnGravar   = new JButton("Gravar");
 		btnCancelar = new JButton("Cancelar");
