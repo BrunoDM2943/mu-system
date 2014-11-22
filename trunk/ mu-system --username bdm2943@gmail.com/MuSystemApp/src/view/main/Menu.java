@@ -56,7 +56,6 @@ public class Menu extends JFrame implements ActionListener {
 	private JMenuItem gerenciaMedia;
 	private JMenuItem gerenciaInstrumento;
 	
-	private JMenu Itens;
 
 	private JMenu 	  menuVenda;
 	private JMenuItem historicoVenda;
@@ -106,7 +105,6 @@ public class Menu extends JFrame implements ActionListener {
 		gerenciaInstrumento.addActionListener(this);
 		
 		historicoVenda.addActionListener(this);
-		Itens.addActionListener(this);
 		realizarVenda.addActionListener(this);
 	}
 
@@ -162,7 +160,6 @@ public class Menu extends JFrame implements ActionListener {
 		historicoVenda      = new JMenuItem("Histórico de Vendas");
 		realizarVenda       = new JMenuItem("Realizar Venda");
 		
-		Itens = new JMenu("Itens");
 	}
 
 	/**
@@ -177,8 +174,6 @@ public class Menu extends JFrame implements ActionListener {
 		menuBar.add(menuRegistros);
 		menuBar.add(menuGerenciamento);
 		menuBar.add(menuVenda);
-		menuBar.add(Itens);
-
 		menuRegistros.add(cadastraCliente);
 		menuRegistros.add(cadastraLuthier);
 		menuRegistros.add(cadastraFabricante);
