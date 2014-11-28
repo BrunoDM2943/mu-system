@@ -226,13 +226,15 @@ public class MediaDaoImpl implements MediaDao, SqlBuilder{
 	@Override
 	public Media getById(int cod) throws Exception {
 		Media media  = null;
-		String sql = "select * from Midia".toUpperCase();
+		String sql = "select * from Midia where cod_midia = ? ".toUpperCase();
 		
 		con = ConnectionFactory.getConnection();		
 		PreparedStatement stmt = con.prepareStatement(sql);
-		ResultSet    result = null;		
+		ResultSet    result = null;
+		stmt.setInt(1, cod);
 		stmt.execute();	
 		result = stmt.getResultSet();
+		
 		
 		while(result.next()){
 			media = new Media();
